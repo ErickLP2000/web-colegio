@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!empty($_SESSION['active'])){
+        header('Location: administrador/');
+    } else if(!empty($_SESSION['activeP'])){
+        header('Location: profesor/');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,9 +49,9 @@
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <form action="" onsubmit="return validar()">
                             <label for="usuario">Usuario</label>
-                            <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario">
+                            <input type="text" name="usuarioProfesor" id="usuarioProfesor" placeholder="Nombre de usuario">
                             <label for="password">Contraseña</label>
-                            <input type="password" name="pass" id="pass" placeholder="Contraseña">
+                            <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña">
                             <div id="messageProfesor"></div>
                             <button id="loginProfesor" type="button">INICIAR SESION</button>
                         </form>

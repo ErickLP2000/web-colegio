@@ -27,15 +27,15 @@ function loginUsuario(){
     })
 }
 function loginProfesor(){
-    var login = $('#usuario').val();
-    var pass = $('#pass').val();
+    var loginProfesor = $('#usuarioProfesor').val();
+    var passProfesor = $('#passProfesor').val();
 
     $.ajax({
-        url: '.includes/loginProfesor.php',
+        url: './includes/loginProfesor.php',
         method: 'POST',
         data: {
-            login:login,
-            pass:pass
+            loginProfesor:loginProfesor,
+            passProfesor:passProfesor
         },
         success: function(data) {
             $('#messageProfesor').html(data);
