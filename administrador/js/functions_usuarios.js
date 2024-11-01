@@ -28,14 +28,15 @@ document.addEventListener('DOMContentLoaded',function(){
     var formUsuario = document.querySelector('#formUsuario');
     formUsuario.onsubmit =function(e){
         e.preventDefault();
-
+        
+        var idusuario =document.querySelector('#idusuario').value;
         var nombre = document.querySelector('#nombre').value;
         var usuario = document.querySelector('#usuario').value;
         var clave = document.querySelector('#clave').value;
         var rol = document.querySelector('#listRol').value;
         var estado = document.querySelector('#listEstado').value;
         
-        if(nombre == '' || usuario == '' || clave == '' ){
+        if(nombre == '' || usuario == ''){
             Swal.fire({
                 icon: "error",
                 title: "Atención",
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded',function(){
             if(request.readyState == 4 && request.status ==200){
                 var data = JSON.parse(request.responseText);
                 if(data.status){
-                    $('#modalUsuario').modal('hide');
+                    $('#modalusuario').modal('hide');
                     formUsuario.reset();
                     Swal.fire({
                         icon: "success",
@@ -75,7 +76,41 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     }
 })
-
 function openModal(){
+    document.querySelector('#idusuario').value='';
+    document.querySelector('#tituloModal').innerHTML='Nuevo Usuario';
+    document.querySelector('#action').innerHTML='Guardar';
+    document.querySelector('#formUsuario').reset();
     $('#modalusuario').modal('show');
+}
+
+function editarUsuario(id){
+    var idusuario = id;
+    document.querySelector('#tituloModal').innerHTML='Actualizar Usuario';
+    document.querySelector('#action').innerHTML='Actualizar';
+
+    var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+        var url = './models/usuarios/edit-usuarios.php?idusuario='+idusuario;
+        request.open('GET',url,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status ==200){
+                var data = JSON.parse(request.responseText);
+                if(data.status){
+                    document.querySelector('#idusuario').value=data.data.usuario_id;
+                    document.querySelector('#nombre').value=data.data.nombre;
+                    document.querySelector('#usuario').value=data.data.usuario;
+                    document.querySelector('#listRol').value=data.data.rol;
+                    document.querySelector('#listEstado').value=data.data.estado;
+                    $('#modalusuario').modal('show');
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Usuario",
+                        text: data.msg,
+                        confirmButtonColor: "#00695C",
+                    });
+                }
+            }
+        }
 }

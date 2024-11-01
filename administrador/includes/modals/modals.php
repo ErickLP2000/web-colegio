@@ -8,6 +8,7 @@
       </div>
       <div class="modal-body">
         <form id="formUsuario" name="formUsuario">
+          <input type="hidden" name="idusuario" id="idusuario" value="">
           <div class="mb-3">
             <label for="control-label">Nombre:</label>
             <input type="text" class="form-control" name="nombre" id="nombre">
@@ -36,7 +37,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-primary" id="action" type="submit">Guardar</button>
             </div>
         </form>
       </div>
