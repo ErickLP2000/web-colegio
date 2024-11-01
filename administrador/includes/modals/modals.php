@@ -15,11 +15,11 @@
           </div>
           <div class="mb-3">
             <label for="control-label">Usuario:</label>
-            <input type="text" class="form-control" name="usuario" id="usuario">
+            <input type="text" class="form-control" name="usuario" id="usuario" autocomplete="username">
           </div>
             <div class="mb-3">
             <label for="control-label">Contraseña:</label>
-            <input type="password" class="form-control" name="clave" id="clave">
+            <input type="password" class="form-control" name="clave" id="clave"  autocomplete="current-password">
             </div>
             <div class="mb-3">
             <label for="listRol">Rol:</label>

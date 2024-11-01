@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 }else{
                     Swal.fire({
                         icon: "error",
-                        title: "Usuario",
+                        title: "Atención",
                         text: data.msg,
                         confirmButtonColor: "#00695C",
                     });
@@ -113,4 +113,48 @@ function editarUsuario(id){
                 }
             }
         }
+}
+
+function eliminarUsuario(id){
+    var idusuario = id;
+    Swal.fire({
+        title: "Eliminar Usuario",
+        text: "Realmente desea eliminar usuario?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#00695C",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "No, cancelar"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+            var url = './models/usuarios/delet-usuarios.php';
+            request.open('POST',url,true);
+            var strData="idusuario="+idusuario;
+            request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status ==200){
+                    var data = JSON.parse(request.responseText);
+                    if(data.status){
+                        Swal.fire({
+                            title: "Eliminado",
+                            text: data.msg,
+                            icon: "success",
+                            confirmButtonColor: "#00695C"
+                        });
+                        tableusuarios.ajax.reload();
+                    }else{
+                        Swal.fire({
+                            icon: "error",
+                            title: "Atencion",
+                            text: data.msg,
+                            confirmButtonColor: "#00695C",
+                        });
+                    }
+                }
+            }
+        }
+    });
 }

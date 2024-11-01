@@ -11,7 +11,7 @@
         if($consulta[$i]['estado'] ==1){
             $consulta[$i]['estado'] = '<span class="badge text-bg-success">Activo</span>';
         } else{
-            $consulta[$i]['estado'] = '<span class="badge text-bg-danger">Inactico</span>';
+            $consulta[$i]['estado'] = '<span class="badge text-bg-danger">Inactivo</span>';
         }
 
         $consulta[$i]['acciones'] = '
