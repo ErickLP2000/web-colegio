@@ -1,26 +1,28 @@
-$('#tableProfesores').DataTable();
-var tableProfesores;
+$('#tableAlumnos').DataTable();
+var tableAlumnos;
 
 document.addEventListener('DOMContentLoaded',function(){
-    tableProfesores =$('#tableProfesores').DataTable({
+    tableAlumnos =$('#tableAlumnos').DataTable({
         "aProcessing":true,
         "aServerSide":true,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"    
         },
         "ajax":{
-            "url": "./models/profesores/table_profesores.php",
+            "url": "./models/alumnos/table_alumnos.php",
             "dataSrc": ""
         },
         "columns":[
             {"data": "acciones"},
-            {"data": "profesor_id"},
-            {"data": "nombre"},
+            {"data": "alumno_id"},
+            {"data": "nombre_alumno"},
+            {"data": "edad"},
             {"data": "direccion"},
             {"data": "cedula"},
             {"data": "telefono"},
             {"data": "correo"},
-            {"data": "nivel_est"},
+            {"data": "fecha_nac"},
+            {"data": "fecha_registro"},
             {"data": "estado"}
         ],
         "responsive": true,
@@ -28,22 +30,23 @@ document.addEventListener('DOMContentLoaded',function(){
         "iDisplayLength": 10,
         "order": [[0,"asc"]]
     });
-    var formProfesor = document.querySelector('#formProfesor');
-    if (formProfesor) {
-        formProfesor.onsubmit =function(e){
+    var formAlumno = document.querySelector('#formAlumno');
+    if (formAlumno) {
+        formAlumno.onsubmit =function(e){
             e.preventDefault();
             
-            var idprofesor =document.querySelector('#idprofesor').value;
+            var idalumno =document.querySelector('#idalumno').value;
             var nombre = document.querySelector('#nombre').value;
+            var edad = document.querySelector('#edad').value;
             var direccion = document.querySelector('#direccion').value;
             var cedula = document.querySelector('#cedula').value;
-            var clave = document.querySelector('#clave').value;
             var telefono = document.querySelector('#telefono').value;
             var correo = document.querySelector('#correo').value;
-            var nivel_est = document.querySelector('#nivel_est').value;
+            var fecha_nac = document.querySelector('#fecha_nac').value;
+            var fecha_reg = document.querySelector('#fecha_reg').value;
             var estado = document.querySelector('#listEstado').value;
             
-            if(nombre == '' || direccion == '' || cedula == '' || telefono == '' || correo == '' || nivel_est == ''){
+            if(nombre == '' || edad == '' || direccion == '' || cedula == '' || telefono == '' || correo == '' || fecha_nac == ''){
                 Swal.fire({
                     icon: "error",
                     title: "Atención",
@@ -54,23 +57,23 @@ document.addEventListener('DOMContentLoaded',function(){
             }
 
             var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-            var url = 'models/profesores/ajax-profesores.php';
-            var form = new FormData(formProfesor);
+            var url = 'models/alumnos/ajax-alumnos.php';
+            var form = new FormData(formAlumno);
             request.open('POST',url,true);
             request.send(form);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status ==200){
                     var data = JSON.parse(request.responseText);
                     if(data.status){
-                        $('#modalProfesor').modal('hide');
-                        formProfesor.reset();
+                        $('#modalAlumno').modal('hide');
+                        formAlumno.reset();
                         Swal.fire({
                             icon: "success",
                             title: "Usuario",
                             text: data.msg,
                             confirmButtonColor: "#00695C",
                         });
-                        tableProfesores.ajax.reload();
+                        tableAlumnos.ajax.reload();
                     }else{
                         Swal.fire({
                             icon: "error",
@@ -85,53 +88,55 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 });
 
-function openModalProfesor(){
-    document.querySelector('#idprofesor').value='';
-    document.querySelector('#tituloModal').innerHTML='Nuevo Profesor';
+function openModalAlumno(){
+    document.querySelector('#idalumno').value='';
+    document.querySelector('#tituloModal').innerHTML='Nuevo Alumno';
     document.querySelector('#action').innerHTML='Guardar';
-    document.querySelector('#formProfesor').reset();
-    $('#modalProfesor').modal('show');
+    document.querySelector('#formAlumno').reset();
+    $('#modalAlumno').modal('show');
 }
 
-function editarProfesor(id){
-    var idprofesor = id;
-    document.querySelector('#tituloModal').innerHTML='Actualizar Profesor';
+function editarAlumno(id){
+    var idalumno = id;
+    document.querySelector('#tituloModal').innerHTML='Actualizar Alumno';
     document.querySelector('#action').innerHTML='Actualizar';
 
     var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-    var url = './models/profesores/edit-profesores.php?idprofesor='+idprofesor;
-    request.open('GET',url,true);
-    request.send();
-    request.onreadystatechange = function(){
-         if(request.readyState == 4 && request.status ==200){
-            var data = JSON.parse(request.responseText);
-            if(data.status){
-                document.querySelector('#idprofesor').value = data.data.profesor_id;
-                document.querySelector('#nombre').value = data.data.nombre;
-                document.querySelector('#direccion').value = data.data.direccion;
-                document.querySelector('#cedula').value = data.data.cedula;
-                document.querySelector('#telefono').value = data.data.telefono;
-                document.querySelector('#correo').value = data.data.correo;
-                document.querySelector('#nivel_est').value = data.data.nivel_est;
-                document.querySelector('#listEstado').value = data.data.estado;
-                $('#modalProfesor').modal('show');
-            }else{
-                Swal.fire({
-                    icon: "error",
-                    title: "Usuario",
-                    text: data.msg,
-                    confirmButtonColor: "#00695C",
-                });
+        var url = './models/alumnos/edit-alumnos.php?idalumno='+idalumno;
+        request.open('GET',url,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status ==200){
+                var data = JSON.parse(request.responseText);
+                if(data.status){
+                    document.querySelector('#idalumno').value = data.data.alumno_id;
+                    document.querySelector('#nombre').value = data.data.nombre_alumno;
+                    document.querySelector('#edad').value = data.data.edad;
+                    document.querySelector('#direccion').value = data.data.direccion;
+                    document.querySelector('#cedula').value = data.data.cedula;
+                    document.querySelector('#telefono').value = data.data.telefono;
+                    document.querySelector('#correo').value = data.data.correo;
+                    document.querySelector('#fecha_nac').value = data.data.fecha_nac;
+                    document.querySelector('#fecha_reg').value = data.data.fecha_registro;
+                    document.querySelector('#listEstado').value = data.data.estado;
+                    $('#modalAlumno').modal('show');
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: "Usuario",
+                        text: data.msg,
+                        confirmButtonColor: "#00695C",
+                    });
+                }
             }
         }
-    }
 }
 
-function eliminarProfesor(id){
-    var idprofesor = id;
+function eliminarAlumno(id){
+    var idalumno = id;
     Swal.fire({
-        title: "Eliminar Profesor",
-        text: "Realmente desea eliminar el profesor?",
+        title: "Eliminar Alumno",
+        text: "Realmente desea eliminar el alumno?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#00695C",
@@ -141,9 +146,9 @@ function eliminarProfesor(id){
       }).then((result) => {
         if (result.isConfirmed) {
             var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-            var url = './models/profesores/delet-profesores.php';
+            var url = './models/alumnos/delet-alumnos.php';
             request.open('POST',url,true);
-            var strData="idprofesor="+idprofesor;
+            var strData="idalumno="+idalumno;
             request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             request.send(strData);
             request.onreadystatechange = function(){
@@ -156,7 +161,7 @@ function eliminarProfesor(id){
                             icon: "success",
                             confirmButtonColor: "#00695C"
                         });
-                        tableProfesores.ajax.reload();
+                        tableAlumnos.ajax.reload();
                     }else{
                         Swal.fire({
                             icon: "error",

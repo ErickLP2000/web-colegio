@@ -7,5 +7,6 @@
     <script src="../js/plugins/datatables.min.js"></script>->
     <script src="js/functions_usuarios.js"></script>
     <script src="js/functions_profesores.js"></script>
+    <script src="js/functions_alumnos.js"></script>
   </body>
 </html>
