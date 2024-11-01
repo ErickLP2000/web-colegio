@@ -4,9 +4,12 @@
     <script src="../js/main.js"></script>
     <!-- Page specific javascripts-->
     <!-- Data table plugin-->
-    <script src="../js/plugins/datatables.min.js"></script>->
+    <script src="../js/plugins/datatables.min.js"></script>
     <script src="js/functions_usuarios.js"></script>
     <script src="js/functions_profesores.js"></script>
     <script src="js/functions_alumnos.js"></script>
+    <script src="js/functions_grados.js"></script>
+    <script src="js/functions_aulas.js"></script>
+    <script src="js/functions_materias.js"></script>
   </body>
 </html>
