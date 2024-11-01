@@ -6,5 +6,6 @@
     <!-- Data table plugin-->
     <script src="../js/plugins/datatables.min.js"></script>->
     <script src="js/functions_usuarios.js"></script>
+    <script src="js/functions_profesores.js"></script>
   </body>
 </html>

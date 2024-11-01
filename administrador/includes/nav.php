@@ -8,7 +8,8 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item" href="lista_usuarios.php"><i class="app-menu__icon bi bi-box-arrow-in-left"></i><span class="app-menu__label">Usuarios</span></a></li>
+        <li><a class="app-menu__item" href="lista_usuarios.php"><i class="app-menu__icon bi bi-people-fill"></i><span class="app-menu__label">Usuarios</span></a></li>
+        <li><a class="app-menu__item" href="lista_profesores.php"><i class="app-menu__icon bi bi-person-video3"></i><span class="app-menu__label">Profesores</span></a></li>
         <li><a class="app-menu__item" href="../logout.php"><i class="app-menu__icon bi bi-box-arrow-in-left"></i><span class="app-menu__label">Logout</span></a></li>
       </ul>
     </aside>
