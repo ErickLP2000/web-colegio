@@ -16,6 +16,9 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="../css/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/sweetalert2.min.css">
+    <script src="../js/plugins/sweetalert2.min.js"></script>
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
