@@ -20,8 +20,8 @@
     <header class="main-header">
         <div class="main-cont">
             <div class="desc-header">
-                <img src="images/school.svg" alt="image school">    
-                <p>School</p>
+                <img src="images/school-svg.svg" alt="image school">    
+                <p>Institución Educativa 5010 Virgen de Guadalupe</p>
             </div>
         </div>   
         <div class="cont-header">

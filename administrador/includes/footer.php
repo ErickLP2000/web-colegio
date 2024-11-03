@@ -11,5 +11,7 @@
     <script src="js/functions_grados.js"></script>
     <script src="js/functions_aulas.js"></script>
     <script src="js/functions_materias.js"></script>
+    <script src="js/functions_periodos.js"></script>
+    <script src="js/functions_actividades.js"></script>
   </body>
 </html>
