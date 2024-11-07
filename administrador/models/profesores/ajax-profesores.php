@@ -9,7 +9,6 @@ if(!empty($_POST)){
         $nombre =$_POST['nombre'];
         $direccion =$_POST['direccion'];
         $cedula =$_POST['cedula'];
-        $clave =$_POST['clave'];
         $telefono =$_POST['telefono'];
         $correo =$_POST['correo'];
         $nivel_est =$_POST['nivel_est'];
@@ -17,7 +16,6 @@ if(!empty($_POST)){
 
         $idprofesor = isset($_POST['idprofesor']) && $_POST['idprofesor'] !== '' ? intval($_POST['idprofesor']) : 0;
 
-        $clave = password_hash($clave,PASSWORD_DEFAULT);
 
         $sql = 'SELECT * FROM profesor WHERE cedula = ? AND profesor_id !=? AND estado !=0'; 
         $query = $pdo->prepare($sql);
@@ -28,20 +26,22 @@ if(!empty($_POST)){
             $respuesta =array('status'=> false,'msg'=>'El profesor ya existe');
         }else{
             if($idprofesor==0){
+                $clave = password_hash($_POST['clave'],PASSWORD_DEFAULT);
                 $sqlInsert = 'INSERT INTO profesor (nombre,direccion,cedula,clave,telefono,correo,nivel_est,estado) VALUES (?,?,?,?,?,?,?,?)';
                 $queryInsert = $pdo->prepare($sqlInsert);
                 $request = $queryInsert->execute(array($nombre,$direccion,$cedula,$clave,$telefono,$correo,$nivel_est,$estado));
                 $accion =1;
             }else{
-                if(empty($clave)){
+                if(empty($_POST['clave'])){
                     $sqlUpdate = 'UPDATE profesor SET nombre=?,direccion=?,cedula=?,telefono=?,correo=?,nivel_est=?,estado=? WHERE profesor_id=?';
                     $queryUpdate = $pdo->prepare($sqlUpdate);
                     $request = $queryUpdate->execute(array($nombre,$direccion,$cedula,$telefono,$correo,$nivel_est,$estado,$idprofesor));
                     $accion =2;
                 }else{
+                    $claveUpdate = password_hash($_POST['clave'],PASSWORD_DEFAULT);
                     $sqlUpdate = 'UPDATE profesor SET nombre=?,direccion=?,cedula=?,clave=?,telefono=?,correo=?,nivel_est=?,estado=? WHERE profesor_id=?';
                     $queryUpdate = $pdo->prepare($sqlUpdate);
-                    $request = $queryUpdate->execute(array($nombre,$direccion,$cedula,$clave,$telefono,$correo,$nivel_est,$estado,$idprofesor));
+                    $request = $queryUpdate->execute(array($nombre,$direccion,$cedula,$claveUpdate,$telefono,$correo,$nivel_est,$estado,$idprofesor));
                     $accion =3;
                 }
             }
