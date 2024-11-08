@@ -11,15 +11,15 @@
           <input type="hidden" name="idusuario" id="idusuario" value="">
           <div class="mb-3">
             <label for="control-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre">
+            <input type="text" class="form-control" name="nombre" id="nombre" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Usuario:</label>
-            <input type="text" class="form-control" name="usuario" id="usuario" autocomplete="username">
+            <input type="text" class="form-control" name="usuario" id="usuario" autocomplete="username" required>
           </div>
             <div class="mb-3">
             <label for="control-label">Contraseña:</label>
-            <input type="password" class="form-control" name="clave" id="clave"  autocomplete="current-password">
+            <input type="password" class="form-control" name="clave" id="clave" minlength="6"  autocomplete="current-password">
             </div>
             <div class="mb-3">
             <label for="listRol">Rol:</label>

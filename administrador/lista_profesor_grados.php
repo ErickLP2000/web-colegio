@@ -10,7 +10,7 @@ require_once 'includes/modals/modal_profesor_grado.php'
           <button class="btn btn-primary" type="button" onclick="openModalProfesorGrado()" style="margin-top: 20px;">Nuevo Profesor Grado</button>
         </div>
         <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
+          <li class="breadcrumb-item"><i class="fa-solid fa-house"></i></li>
           <li class="breadcrumb-item"><a href="#">lista de profesor grado</a></li>
         </ul>
       </div>

@@ -10,35 +10,35 @@
           <input type="hidden" name="idalumno" id="idalumno" value="">
           <div class="mb-3">
             <label for="control-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre">
+            <input type="text" class="form-control" name="nombre" id="nombre" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Edad:</label>
-            <input type="text" class="form-control" name="edad" id="edad">
+            <input type="age" class="form-control" name="edad" id="edad" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Dirección:</label>
-            <input type="text" class="form-control" name="direccion" id="direccion">
+            <input type="text" class="form-control" name="direccion" id="direccion" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Cédula:</label>
-            <input type="text" class="form-control" name="cedula" id="cedula" autocomplete="username">
+            <input type="text" class="form-control" name="cedula" id="cedula" autocomplete="username" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Telefono:</label>
-            <input type="text" class="form-control" name="telefono" id="telefono">
+            <input type="text" class="form-control" name="telefono" id="telefono" pattern="^[0-9]+$" title="Solo se permiten números" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Correo:</label>
-            <input type="text" class="form-control" name="correo" id="correo">
+            <input type="email" class="form-control" name="correo" id="correo" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Fecha de nacimiento:</label>
-            <input type="date" class="form-control" name="fecha_nac" id="fecha_nac">
+            <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Fecha de registro:</label>
-            <input type="date" class="form-control" name="fecha_reg" id="fecha_reg">
+            <input type="date" class="form-control" name="fecha_reg" id="fecha_reg" required>
           </div>
             <div class="mb-3">
                 <label for="listEstado">Estado:</label>

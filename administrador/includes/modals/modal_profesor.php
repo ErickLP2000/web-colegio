@@ -10,35 +10,35 @@
           <input type="hidden" name="idprofesor" id="idprofesor" value="">
           <div class="mb-3">
             <label for="control-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre">
+            <input type="text" class="form-control" name="nombre" id="nombre" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Dirección:</label>
-            <input type="text" class="form-control" name="direccion" id="direccion">
+            <input type="text" class="form-control" name="direccion" id="direccion" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Cédula:</label>
-            <input type="text" class="form-control" name="cedula" id="cedula" autocomplete="username">
+            <input type="text" class="form-control" name="cedula" id="cedula" autocomplete="username" required>
           </div>
             <div class="mb-3">
             <label for="control-label">Contraseña:</label>
-            <input type="password" class="form-control" name="clave" id="clave"  autocomplete="current-password">
+            <input type="password" class="form-control" name="clave" id="clave" minlength="6" autocomplete="current-password">
             </div>
           <div class="mb-3">
             <label for="control-label">Telefono:</label>
-            <input type="text" class="form-control" name="telefono" id="telefono">
+            <input type="text" class="form-control" name="telefono" id="telefono" pattern="^[0-9]+$" title="Solo se permiten números" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Correo:</label>
-            <input type="text" class="form-control" name="correo" id="correo">
+            <input type="email" class="form-control" name="correo" id="correo" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Nivel de estudio:</label>
-            <input type="text" class="form-control" name="nivel_est" id="nivel_est">
+            <input type="text" class="form-control" name="nivel_est" id="nivel_est" required>
           </div>
             <div class="mb-3">
                 <label for="listEstado">Estado:</label>
-                <select class="form-control" name="listEstado" id="listEstado">
+                <select class="form-control" name="listEstado" id="listEstado" required>
                     <option value="1">Activo</option>
                     <option value="2">Inactivo</option>
                 </select>

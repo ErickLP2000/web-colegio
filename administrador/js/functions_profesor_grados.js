@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "aProcessing":true,
         "aServerSide":true,
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"    
+            "url": "../js/es-ES.json"    
         },
         "ajax":{
             "url": "./models/profesor-grado/table_profesor_grados.php",
@@ -89,10 +89,18 @@ function openModalProfesorGrado(){
 }
 
 window.addEventListener('load',function(){
-    showProfesor();
-    showGrado();
-    showAula();
-    showPeriodo();
+    if(document.querySelector('#listProfesor')){
+        showProfesor();
+    }
+    if(document.querySelector('#listGrado')){
+        showGrado();
+    }
+    if(document.querySelector('#listAula')){
+        showAula();
+    }
+    if(document.querySelector('#listPeriodo')){
+        showPeriodo();
+    }
 },false);
 
 function showProfesor(){

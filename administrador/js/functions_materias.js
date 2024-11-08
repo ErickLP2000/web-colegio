@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "aProcessing":true,
         "aServerSide":true,
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"    
+            "url": "../js/es-ES.json"    
         },
         "ajax":{
             "url": "./models/materias/table_materias.php",

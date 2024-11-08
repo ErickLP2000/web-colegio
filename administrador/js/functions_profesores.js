@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "aProcessing":true,
         "aServerSide":true,
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"    
+            "url": "../js/es-ES.json"    
         },
         "ajax":{
             "url": "./models/profesores/table_profesores.php",
@@ -22,6 +22,49 @@ document.addEventListener('DOMContentLoaded',function(){
             {"data": "correo"},
             {"data": "nivel_est"},
             {"data": "estado"}
+        ],
+        "dom": 'lBfrtip',
+        "buttons": [
+            {
+                "extend":"copy",
+                "text": "Copiar",
+                "titleAttr": "Copiar",
+                "className": "btn btn-secondary",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                  }
+            },
+            {
+                "extend":"excel",
+                "text": '<i class="fa-solid fa-file-excel"></i>',
+                "titleAttr": "Exportar a excel",
+                "className": "btn btn-success",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                  }
+            },
+            {
+                "extend":"pdf",
+                "text": '<i class="fa-solid fa-file-pdf"></i>',
+                "titleAttr": "Exportar a pdf",
+                "className": "btn btn-danger",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                  }
+            },
+            {
+                "extend":"print",
+                "text": '<i class="fa-solid fa-print"></i>',
+                "titleAttr": "Imprimir",
+                "className": "btn btn-info",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                  }
+            },
+            {
+                "extend":"colvis",
+                "text": "Filtrar Columnas"
+            }
         ],
         "responsive": true,
         "bDestroy": true,
@@ -48,6 +91,39 @@ document.addEventListener('DOMContentLoaded',function(){
                     icon: "error",
                     title: "Atención",
                     text: "Todos los campos son necesarios",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            if (!/^\d+$/.test(telefono)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El telefono no es válido",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            var correoRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!correoRegex.test(correo)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El correo electrónico no es válido",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            const telefonoInt = BigInt(telefono);
+            const maxBigInt = 9223372036854775807n;
+            if (telefonoInt < 0 || telefonoInt > maxBigInt) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El teléfono supera el máximo permitido",
                     confirmButtonColor: "#00695C",
                 });
                 return false;

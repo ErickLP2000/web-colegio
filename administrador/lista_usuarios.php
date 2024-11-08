@@ -10,7 +10,7 @@ require_once 'includes/modals/modals.php'
           <button class="btn btn-primary" type="button" onclick="openModalUsuario()" style="margin-top: 20px;">Nuevo Usuario</button>
         </div>
         <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
+          <li class="breadcrumb-item"><i class="fa-solid fa-house"></i></li>
           <li class="breadcrumb-item"><a href="#">lista de usuarios</a></li>
         </ul>
       </div>

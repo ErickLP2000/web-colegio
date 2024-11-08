@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',function(){
         "aProcessing":true,
         "aServerSide":true,
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"    
+            "url": "../js/es-ES.json"    
         },
         "ajax":{
             "url": "./models/usuarios/table_usuarios.php",
@@ -19,6 +19,71 @@ document.addEventListener('DOMContentLoaded',function(){
             {"data": "usuario"},
             {"data": "nombre_rol"},
             {"data": "estado"}
+        ],
+        "dom": 'lBfrtip',
+        "buttons": [
+            {
+                "extend":"copy",
+                "text": "Copiar",
+                "titleAttr": "Copiar",
+                "className": "btn btn-secondary",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                  }
+            },
+            {
+                "extend":"excel",
+                "text": '<i class="fa-solid fa-file-excel"></i>',
+                "titleAttr": "Exportar a excel",
+                "className": "btn btn-success",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                },
+                "filename": "Lista_Usuarios_XLSX",
+                "title": "Lista de Usuarios",
+            },
+            
+            {
+                "extend":"pdf",
+                "text": '<i class="fa-solid fa-file-pdf"></i>',
+                "titleAttr": "Exportar a pdf",
+                "className": "btn btn-danger",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                },
+                "filename": "Lista_Usuarios_PDF",
+                "title": "Lista de Usuarios",   
+                "customize": function (doc) {
+                    doc.styles.title = {
+                        fontSize: 20,  
+                        bold: true,
+                        alignment: 'center'
+                    };   
+                    doc.content[1].table.widths = [ '6%', '52%', '15%', '15%', '12%' ];
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.pageMargins = [ 20, 40, 20, 30 ];
+                    doc.defaultStyle.fontSize = 10;
+                }
+            },
+
+            {
+                "extend":"print",
+                "text": '<i class="fa-solid fa-print"></i>',
+                "titleAttr": "Imprimir",
+                "className": "btn btn-info",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                },
+                "customize": function (win) {
+                $(win.document.body)
+                    .css('font-size', '10pt')
+                    .prepend('<h3>Lista de Usuarios</h3>')
+                }
+            },
+            {
+                "extend":"colvis",
+                "text": "Filtrar Columnas"
+            }
         ],
         "responsive": true,
         "bDestroy": true,
