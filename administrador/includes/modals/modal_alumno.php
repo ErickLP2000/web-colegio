@@ -14,7 +14,7 @@
           </div>
           <div class="mb-3">
             <label for="control-label">Edad:</label>
-            <input type="age" class="form-control" name="edad" id="edad" required>
+            <input type="number" class="form-control" name="edad" id="edad" required min="3" max="14" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Dirección:</label>
@@ -25,8 +25,9 @@
             <input type="text" class="form-control" name="documento" id="documento" autocomplete="username" required>
           </div>
           <div class="mb-3">
-            <label for="control-label">Apoderado:</label>
-            <input type="text" class="form-control" name="telefono" id="telefono" pattern="^[0-9]+$" title="Solo se permiten números" required>
+                <label for="listApoderado">Apoderado:</label>
+                <select class="form-control" name="listApoderado" id="listApoderado">
+                </select>
           </div>
           <div class="mb-3">
             <label for="control-label">Fecha de nacimiento:</label>

@@ -11,7 +11,7 @@
         <li><a class="app-menu__item" href="lista_usuarios.php"><i class="app-menu__icon fa-solid fa-users"></i><span class="app-menu__label">Usuarios</span></a></li>
         <li><a class="app-menu__item" href="lista_profesores.php"><i class="app-menu__icon fa-solid fa-chalkboard-user"></i><span class="app-menu__label">Profesores</span></a></li>
         <li><a class="app-menu__item" href="lista_alumnos.php"><i class="app-menu__icon fa-solid fa-graduation-cap"></i><span class="app-menu__label">Alumnos</span></a></li><li>
-        <a class="app-menu__item" href="lista_apoderados.php"><i class="app-menu__icon fa-solid fa-graduation-cap"></i><span class="app-menu__label">Apoderados</span></a></li>
+        <a class="app-menu__item" href="lista_apoderados.php"><i class="app-menu__icon fa-solid fa-user-shield"></i><span class="app-menu__label">Apoderados</span></a></li>
         <li><a class="app-menu__item" href="lista_grados.php"><i class="app-menu__icon fa-solid fa-book"></i><span class="app-menu__label">Grados</span></a></li>
         <li><a class="app-menu__item" href="lista_aulas.php"><i class="app-menu__icon fa-solid fa-book"></i><span class="app-menu__label">Aulas</span></a></li>
         <li><a class="app-menu__item" href="lista_materias.php"><i class="app-menu__icon fa-solid fa-book"></i><span class="app-menu__label">Materias</span></a></li>

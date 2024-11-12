@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded',function(){
             {"data": "edad"},
             {"data": "direccion"},
             {"data": "documento"},
-            {"data": "telefono"},
+            {"data": "nombre_apoderado"},
             {"data": "fecha_nac"},
             {"data": "fecha_registro"},
             {"data": "estado"}
@@ -103,17 +103,27 @@ document.addEventListener('DOMContentLoaded',function(){
             var edad = document.querySelector('#edad').value;
             var direccion = document.querySelector('#direccion').value;
             var documento = document.querySelector('#documento').value;
-            var telefono = document.querySelector('#telefono').value;
+            var apoderado = document.querySelector('#listApoderado').value;
             var fecha_nac = document.querySelector('#fecha_nac').value;
             var fecha_reg = document.querySelector('#fecha_reg').value;
             var estado = document.querySelector('#listEstado').value;
             
-            if(nombre == '' || edad == '' || direccion == '' || documento == '' || telefono == '' || fecha_nac == ''){
+            if(nombre == '' || edad == '' || direccion == '' || documento == '' || apoderado == '' || fecha_nac == ''){
                 Swal.fire({
                     icon: "error",
                     title: "Atención",
                     text: "Todos los campos son necesarios",
                     confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            if (edad < 4 || edad > 14 || isNaN(edad)) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Atención",
+                  text: "Por favor, ingrese una edad válida entre 5 y 12 años.",
+                  confirmButtonColor: "#00695C",
                 });
                 return false;
             }
@@ -158,6 +168,28 @@ function openModalAlumno(){
     $('#modalAlumno').modal('show');
 }
 
+window.addEventListener('load',function(){
+    if(document.querySelector('#listApoderado')){
+        showApoderado();
+    }
+},false);
+
+function showApoderado(){
+    var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+    var url = 'models/options/options-apoderado.php';
+    request.open('GET',url,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status ==200){
+            var data = JSON.parse(request.responseText);
+            data.forEach(function(valor){
+                data += '<option value="'+valor.apoderado_id+'">'+valor.nombre_apoderado+'</option>'
+            });
+            document.querySelector('#listApoderado').innerHTML = data;
+        }
+    };
+}
+
 function editarAlumno(id){
     var idalumno = id;
     document.querySelector('#tituloModal').innerHTML='Actualizar Alumno';
@@ -176,7 +208,7 @@ function editarAlumno(id){
                     document.querySelector('#edad').value = data.data.edad;
                     document.querySelector('#direccion').value = data.data.direccion;
                     document.querySelector('#documento').value = data.data.documento;
-                    document.querySelector('#telefono').value = data.data.telefono;
+                    document.querySelector('#listApoderado').value = data.data.apoderado_id;
                     document.querySelector('#fecha_nac').value = data.data.fecha_nac;
                     document.querySelector('#fecha_reg').value = data.data.fecha_registro;
                     document.querySelector('#listEstado').value = data.data.estado;

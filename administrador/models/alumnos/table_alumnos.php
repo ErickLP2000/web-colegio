@@ -1,7 +1,7 @@
 <?php
     require_once '../../../includes/conexion.php';
 
-    $sql = 'SELECT * FROM alumnos WHERE estado !=0';
+    $sql = 'SELECT * FROM alumnos as a INNER JOIN apoderado as ap ON a.apoderado_id=ap.apoderado_id WHERE a.estado !=0';
     $query = $pdo->prepare($sql);
     $query -> execute();
     
