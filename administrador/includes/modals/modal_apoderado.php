@@ -1,20 +1,16 @@
-<div class="modal fade" id="modalAlumno" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalApoderado" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="tituloModal">Nuevo profesor</h1>
+        <h1 class="modal-title fs-5" id="tituloModal">Nuevo apoderado</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="formAlumno" name="formAlumno">
-          <input type="hidden" name="idalumno" id="idalumno" value="">
+        <form id="formApoderado" name="formApoderado">
+          <input type="hidden" name="idapoderado" id="idapoderado" value="">
           <div class="mb-3">
             <label for="control-label">Nombre:</label>
             <input type="text" class="form-control" name="nombre" id="nombre" required>
-          </div>
-          <div class="mb-3">
-            <label for="control-label">Edad:</label>
-            <input type="age" class="form-control" name="edad" id="edad" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Dirección:</label>
@@ -24,21 +20,21 @@
             <label for="control-label">Documento:</label>
             <input type="text" class="form-control" name="documento" id="documento" autocomplete="username" required>
           </div>
+            <div class="mb-3">
+            <label for="control-label">Contraseña:</label>
+            <input type="password" class="form-control" name="clave" id="clave" minlength="6" autocomplete="current-password">
+            </div>
           <div class="mb-3">
-            <label for="control-label">Apoderado:</label>
+            <label for="control-label">Telefono:</label>
             <input type="text" class="form-control" name="telefono" id="telefono" pattern="^[0-9]+$" title="Solo se permiten números" required>
           </div>
           <div class="mb-3">
-            <label for="control-label">Fecha de nacimiento:</label>
-            <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" required>
+            <label for="control-label">Correo:</label>
+            <input type="email" class="form-control" name="correo" id="correo" required>
           </div>
           <div class="mb-3">
-            <label for="control-label">Fecha de registro:</label>
-            <input type="date" class="form-control" name="fecha_reg" id="fecha_reg" required>
-          </div>
-            <div class="mb-3">
                 <label for="listEstado">Estado:</label>
-                <select class="form-control" name="listEstado" id="listEstado">
+                <select class="form-control" name="listEstado" id="listEstado" required>
                     <option value="1">Activo</option>
                     <option value="2">Inactivo</option>
                 </select>

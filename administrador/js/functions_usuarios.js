@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 "className": "btn btn-secondary",
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
-                  }
+                }
             },
             {
                 "extend":"excel",

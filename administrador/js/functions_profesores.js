@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 "className": "btn btn-secondary",
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
-                  }
+                }
             },
             {
                 "extend":"excel",
@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded',function(){
                 "className": "btn btn-success",
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
-                  }
+                },
+                "filename": "Lista_Profesores_XLSX",
+                "title": "Lista de Profesores",
             },
             {
                 "extend":"pdf",
@@ -50,7 +52,20 @@ document.addEventListener('DOMContentLoaded',function(){
                 "className": "btn btn-danger",
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
-                  }
+                },
+                "filename": "Lista_Profesores_PDF",
+                "title": "Lista de Profesores",   
+                "customize": function (doc) {
+                    doc.styles.title = {
+                        fontSize: 20,  
+                        bold: true,
+                        alignment: 'center'
+                    };   
+                    doc.content[1].table.widths = [ '3%', '19%', '13%', '15%', '13%', '18%', '9%', '10%' ];
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.pageMargins = [ 20, 40, 20, 30 ];
+                    doc.defaultStyle.fontSize = 10;
+                }
             },
             {
                 "extend":"print",
@@ -59,7 +74,12 @@ document.addEventListener('DOMContentLoaded',function(){
                 "className": "btn btn-info",
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
-                  }
+                },
+                "customize": function (win) {
+                $(win.document.body)
+                    .css('font-size', '10pt')
+                    .prepend('<h3>Lista de Profesores</h3>')
+                }
             },
             {
                 "extend":"colvis",

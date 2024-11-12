@@ -9,6 +9,7 @@
     <script src="js/functions_usuarios.js"></script>
     <script src="js/functions_profesores.js"></script>
     <script src="js/functions_alumnos.js"></script>
+    <script src="js/functions_apoderados.js"></script>
     <script src="js/functions_grados.js"></script>
     <script src="js/functions_aulas.js"></script>
     <script src="js/functions_materias.js"></script>

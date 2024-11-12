@@ -1,27 +1,25 @@
-$('#tableAlumnos').DataTable();
-var tableAlumnos;
+$('#tableApoderados').DataTable();
+var tableApoderados;
 
 document.addEventListener('DOMContentLoaded',function(){
-    tableAlumnos =$('#tableAlumnos').DataTable({
+    tableApoderados =$('#tableApoderados').DataTable({
         "aProcessing":true,
         "aServerSide":true,
         "language": {
-            "url": "../js/es-ES.json",
+            "url": "../js/es-ES.json"    
         },
         "ajax":{
-            "url": "./models/alumnos/table_alumnos.php",
+            "url": "./models/apoderados/table_apoderados.php",
             "dataSrc": ""
         },
         "columns":[
             {"data": "acciones"},
-            {"data": "alumno_id"},
-            {"data": "nombre_alumno"},
-            {"data": "edad"},
+            {"data": "apoderado_id"},
+            {"data": "nombre_apoderado"},
             {"data": "direccion"},
             {"data": "documento"},
             {"data": "telefono"},
-            {"data": "fecha_nac"},
-            {"data": "fecha_registro"},
+            {"data": "correo"},
             {"data": "estado"}
         ],
         "dom": 'lBfrtip',
@@ -33,7 +31,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 "className": "btn btn-secondary",
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
-                }
+                  }
             },
             {
                 "extend":"excel",
@@ -43,8 +41,8 @@ document.addEventListener('DOMContentLoaded',function(){
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
                 },
-                "filename": "Lista_Alumnos_XLSX",
-                "title": "Lista de Alumnos",
+                "filename": "Lista_Apoderados_XLSX",
+                "title": "Lista de Apoderados",
             },
             {
                 "extend":"pdf",
@@ -54,15 +52,15 @@ document.addEventListener('DOMContentLoaded',function(){
                 "exportOptions": {
                     "columns": ':not(:eq(0))'
                 },
-                "filename": "Lista_Alumnos_PDF",
-                "title": "Lista de Alumnos",   
+                "filename": "Lista_Apoderados_PDF",
+                "title": "Lista de Apoderados",   
                 "customize": function (doc) {
                     doc.styles.title = {
                         fontSize: 20,  
                         bold: true,
                         alignment: 'center'
                     };   
-                    doc.content[1].table.widths = ['3%', '17%', '7%', '13%', '16%', '16%', '9%', '9%', '10%'];
+                    doc.content[1].table.widths = [ '3%', '25%', '13%', '15%', '12%', '22%', '10%'];
                     doc.styles.tableHeader.fontSize = 12;
                     doc.pageMargins = [ 20, 40, 20, 30 ];
                     doc.defaultStyle.fontSize = 10;
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 "customize": function (win) {
                 $(win.document.body)
                     .css('font-size', '10pt')
-                    .prepend('<h3>Lista de Alumnos</h3>')
+                    .prepend('<h3>Lista de Apoderados</h3>')
                 }
             },
             {
@@ -91,24 +89,22 @@ document.addEventListener('DOMContentLoaded',function(){
         "bDestroy": true,
         "iDisplayLength": 10,
         "order": [[0,"asc"]]
-        
     });
-    var formAlumno = document.querySelector('#formAlumno');
-    if (formAlumno) {
-        formAlumno.onsubmit =function(e){
+    var formApoderado = document.querySelector('#formApoderado');
+    if (formApoderado) {
+        formApoderado.onsubmit =function(e){
             e.preventDefault();
             
-            var idalumno =document.querySelector('#idalumno').value;
+            var idapoderado =document.querySelector('#idapoderado').value;
             var nombre = document.querySelector('#nombre').value;
-            var edad = document.querySelector('#edad').value;
             var direccion = document.querySelector('#direccion').value;
             var documento = document.querySelector('#documento').value;
+            var clave = document.querySelector('#clave').value;
             var telefono = document.querySelector('#telefono').value;
-            var fecha_nac = document.querySelector('#fecha_nac').value;
-            var fecha_reg = document.querySelector('#fecha_reg').value;
+            var correo = document.querySelector('#correo').value;
             var estado = document.querySelector('#listEstado').value;
             
-            if(nombre == '' || edad == '' || direccion == '' || documento == '' || telefono == '' || fecha_nac == ''){
+            if(nombre == '' || direccion == '' || documento == '' || telefono == '' || correo == ''){
                 Swal.fire({
                     icon: "error",
                     title: "Atención",
@@ -118,24 +114,57 @@ document.addEventListener('DOMContentLoaded',function(){
                 return false;
             }
 
+            if (!/^\d+$/.test(telefono)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El telefono no es válido",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            var correoRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!correoRegex.test(correo)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El correo electrónico no es válido",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            const telefonoInt = BigInt(telefono);
+            const maxBigInt = 9223372036854775807n;
+            if (telefonoInt < 0 || telefonoInt > maxBigInt) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El teléfono supera el máximo permitido",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
             var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-            var url = 'models/alumnos/ajax-alumnos.php';
-            var form = new FormData(formAlumno);
+            var url = 'models/apoderados/ajax-apoderados.php';
+            var form = new FormData(formApoderado);
             request.open('POST',url,true);
             request.send(form);
             request.onreadystatechange = function(){
                 if(request.readyState == 4 && request.status ==200){
                     var data = JSON.parse(request.responseText);
                     if(data.status){
-                        $('#modalAlumno').modal('hide');
-                        formAlumno.reset();
+                        $('#modalApoderado').modal('hide');
+                        formApoderado.reset();
                         Swal.fire({
                             icon: "success",
                             title: "Usuario",
                             text: data.msg,
                             confirmButtonColor: "#00695C",
                         });
-                        tableAlumnos.ajax.reload();
+                        tableApoderados.ajax.reload();
                     }else{
                         Swal.fire({
                             icon: "error",
@@ -150,54 +179,52 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 });
 
-function openModalAlumno(){
-    document.querySelector('#idalumno').value='';
-    document.querySelector('#tituloModal').innerHTML='Nuevo Alumno';
+function openModalApoderado(){
+    document.querySelector('#idapoderado').value='';
+    document.querySelector('#tituloModal').innerHTML='Nuevo Apoderado';
     document.querySelector('#action').innerHTML='Guardar';
-    document.querySelector('#formAlumno').reset();
-    $('#modalAlumno').modal('show');
+    document.querySelector('#formApoderado').reset();
+    $('#modalApoderado').modal('show');
 }
 
-function editarAlumno(id){
-    var idalumno = id;
-    document.querySelector('#tituloModal').innerHTML='Actualizar Alumno';
+function editarApoderado(id){
+    var idapoderado = id;
+    document.querySelector('#tituloModal').innerHTML='Actualizar Apoderado';
     document.querySelector('#action').innerHTML='Actualizar';
 
     var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-        var url = './models/alumnos/edit-alumnos.php?idalumno='+idalumno;
-        request.open('GET',url,true);
-        request.send();
-        request.onreadystatechange = function(){
-            if(request.readyState == 4 && request.status ==200){
-                var data = JSON.parse(request.responseText);
-                if(data.status){
-                    document.querySelector('#idalumno').value = data.data.alumno_id;
-                    document.querySelector('#nombre').value = data.data.nombre_alumno;
-                    document.querySelector('#edad').value = data.data.edad;
-                    document.querySelector('#direccion').value = data.data.direccion;
-                    document.querySelector('#documento').value = data.data.documento;
-                    document.querySelector('#telefono').value = data.data.telefono;
-                    document.querySelector('#fecha_nac').value = data.data.fecha_nac;
-                    document.querySelector('#fecha_reg').value = data.data.fecha_registro;
-                    document.querySelector('#listEstado').value = data.data.estado;
-                    $('#modalAlumno').modal('show');
-                }else{
-                    Swal.fire({
-                        icon: "error",
-                        title: "Usuario",
-                        text: data.msg,
-                        confirmButtonColor: "#00695C",
-                    });
-                }
+    var url = './models/apoderados/edit-apoderados.php?idapoderado='+idapoderado;
+    request.open('GET',url,true);
+    request.send();
+    request.onreadystatechange = function(){
+         if(request.readyState == 4 && request.status ==200){
+            var data = JSON.parse(request.responseText);
+            if(data.status){
+                document.querySelector('#idapoderado').value = data.data.apoderado_id;
+                document.querySelector('#nombre').value = data.data.nombre_apoderado;
+                document.querySelector('#direccion').value = data.data.direccion;
+                document.querySelector('#documento').value = data.data.documento;
+                document.querySelector('#telefono').value = data.data.telefono;
+                document.querySelector('#correo').value = data.data.correo;
+                document.querySelector('#listEstado').value = data.data.estado;
+                $('#modalApoderado').modal('show');
+            }else{
+                Swal.fire({
+                    icon: "error",
+                    title: "Usuario",
+                    text: data.msg,
+                    confirmButtonColor: "#00695C",
+                });
             }
         }
+    }
 }
 
-function eliminarAlumno(id){
-    var idalumno = id;
+function eliminarApoderado(id){
+    var idapoderado = id;
     Swal.fire({
-        title: "Eliminar Alumno",
-        text: "Realmente desea eliminar el alumno?",
+        title: "Eliminar Apoderado",
+        text: "Realmente desea eliminar el apoderado?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#00695C",
@@ -207,9 +234,9 @@ function eliminarAlumno(id){
       }).then((result) => {
         if (result.isConfirmed) {
             var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-            var url = './models/alumnos/delet-alumnos.php';
+            var url = './models/apoderados/delet-apoderados.php';
             request.open('POST',url,true);
-            var strData="idalumno="+idalumno;
+            var strData="idapoderado="+idapoderado;
             request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             request.send(strData);
             request.onreadystatechange = function(){
@@ -222,7 +249,7 @@ function eliminarAlumno(id){
                             icon: "success",
                             confirmButtonColor: "#00695C"
                         });
-                        tableAlumnos.ajax.reload();
+                        tableApoderados.ajax.reload();
                     }else{
                         Swal.fire({
                             icon: "error",

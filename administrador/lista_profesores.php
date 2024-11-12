@@ -26,7 +26,7 @@ require_once 'includes/modals/modal_profesor.php'
                       <th>ID</th>
                       <th>NOMBRE</th>
                       <th>DIRECCION</th>
-                      <th>CEDULA</th>
+                      <th>DOCUMENTO</th>
                       <th>TELEFONO</th>
                       <th>CORREO</th>
                       <th>NIVEL DE EST</th>
