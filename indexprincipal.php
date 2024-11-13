@@ -244,7 +244,7 @@
           <div class="home_text text-center">
             <!-- Agregar la imagen del logo -->
             <a href="#brand">
-              <img src="assets/images/insignia.png" class="logo logo-display m-top-10" alt="">
+              <img src="assets/images/insignia.png" class="logo logo-display m-top-10" alt="" style="padding: 3.5em;">
             </a>
             <h2 class="text-white">Bienvenidos a Institución Educativa Virgen de Guadalupe, donde la excelencia
               académica y el desarrollo integral de nuestros estudiantes son nuestra prioridad</h2>
