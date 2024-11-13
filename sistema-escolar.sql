@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 03:37:16
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: localhost:3307
+-- Tiempo de generación: 12-11-2024 a las 20:59:06
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `actividad` (
   `actividad_id` int(11) NOT NULL,
   `nombre_actividad` varchar(100) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `actividad`
@@ -58,7 +58,7 @@ CREATE TABLE `alumnos` (
   `fecha_nac` date NOT NULL,
   `fecha_registro` date NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `alumnos`
@@ -71,7 +71,7 @@ INSERT INTO `alumnos` (`alumno_id`, `nombre_alumno`, `edad`, `direccion`, `docum
 (7, 'Andres', 24, 'Comas', '91165161', 1, '2024-10-30', '2024-12-07', 0),
 (8, 'Maria', 14, 'Lima', '496121', 2, '2024-11-11', '2024-11-29', 1),
 (9, 'More', 10, 'Comas', '11111111', 1, '2024-11-22', '2024-12-04', 1),
-(10, 'Jose ÑuÑez', 12, 'Comas', '121541', 1, '2024-11-11', '2024-11-27', 1),
+(10, 'Jose dada', 12, 'Comas', '121541', 1, '2024-11-11', '2024-11-27', 1),
 (11, 'Andres', 10, 'Lima', '91165161', 1, '2024-11-15', '2024-11-30', 1),
 (12, 'Luis Nogueraa', 10, 'Comas', '1231442', 1, '2024-11-22', '2024-11-23', 1);
 
@@ -86,7 +86,7 @@ CREATE TABLE `alumno_profesor` (
   `alumno_id` int(11) NOT NULL,
   `pg_id` int(11) NOT NULL,
   `estadop` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,7 @@ CREATE TABLE `apoderado` (
   `telefono` bigint(20) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `apoderado`
@@ -111,7 +111,35 @@ CREATE TABLE `apoderado` (
 
 INSERT INTO `apoderado` (`apoderado_id`, `nombre_apoderado`, `direccion`, `documento`, `clave`, `telefono`, `correo`, `estado`) VALUES
 (1, 'Andres', 'Comas', '71235416', '$2y$10$6yPHQHuZWmhR1AAwqAN3iu7XRowxGVs7BpkQlCIf44GZykaqeAU42', 942154918, 'luis@gmail.com', 1),
-(2, 'Luis Nogueraa', 'Caracas', '71235416', '$2y$10$gMaCCd4i.FLe.ABh.MiFzOXNsqpXARfZZsQRl06ovsOsSJiR8e6M.', 942154918, 'luis@gmail.com', 1);
+(2, 'Luis Nogueraa', 'Caracas', '71235416', '$2y$10$gMaCCd4i.FLe.ABh.MiFzOXNsqpXARfZZsQRl06ovsOsSJiR8e6M.', 942154918, 'luis@gmail.com', 1),
+(3, 'qweqwe', 'sadasdasd', 'qweqwe', '$2y$10$SJlJvzXd7MjscP7n0r6hr.R10YCrEw5zwcBi/zvQox7VWMOppjnWm', 1231231231232, 'danielechegaray5@gmail.com', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `apoderadosaunnoregistrados`
+--
+
+CREATE TABLE `apoderadosaunnoregistrados` (
+  `id` int(11) NOT NULL,
+  `nombre_apoderado` varchar(255) NOT NULL,
+  `apellido_apoderado` varchar(255) NOT NULL,
+  `direccion_apoderado` varchar(255) NOT NULL,
+  `telefono_apoderado` varchar(20) NOT NULL,
+  `dni_apoderado` varchar(20) NOT NULL,
+  `nombre_estudiante` varchar(255) NOT NULL,
+  `apellido_estudiante` varchar(255) NOT NULL,
+  `grado_estudiante` enum('1ero de primaria','2do de primaria','3ro de primaria','4to de primaria','5to de primaria','6to de primaria') NOT NULL,
+  `correo_apoderado` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `apoderadosaunnoregistrados`
+--
+
+INSERT INTO `apoderadosaunnoregistrados` (`id`, `nombre_apoderado`, `apellido_apoderado`, `direccion_apoderado`, `telefono_apoderado`, `dni_apoderado`, `nombre_estudiante`, `apellido_estudiante`, `grado_estudiante`, `correo_apoderado`) VALUES
+(16, 'Daniel', 'Gonzales', 'Comas Av Micaela', '986107799', '31231231', 'Daniel', 'Gonzales', '1ero de primaria', 'danielechegaray5@gmail.com'),
+(17, 'Soñia', 'ñuñez', 'Comas Av Micaela', '213123123', '32324324', 'ñuña', 'ñuñez', '3ro de primaria', 'dsadsd@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -123,7 +151,7 @@ CREATE TABLE `aulas` (
   `aula_id` int(11) NOT NULL,
   `nombre_aula` varchar(100) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `aulas`
@@ -148,7 +176,7 @@ CREATE TABLE `contenidos` (
   `material` varchar(255) NOT NULL,
   `materia_id` int(11) NOT NULL,
   `periodo_id` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -165,7 +193,7 @@ CREATE TABLE `evaluaciones` (
   `materia_id` int(11) NOT NULL,
   `periodo_id` int(11) NOT NULL,
   `contenido_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -179,7 +207,7 @@ CREATE TABLE `ev_entregadas` (
   `observacion` varchar(255) NOT NULL,
   `evaluacion_id` int(11) NOT NULL,
   `alumno_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -191,7 +219,7 @@ CREATE TABLE `grados` (
   `grado_id` int(11) NOT NULL,
   `nombre_grado` varchar(100) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `grados`
@@ -216,7 +244,7 @@ CREATE TABLE `materias` (
   `materia_id` int(11) NOT NULL,
   `nombre_materia` varchar(100) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `materias`
@@ -241,7 +269,7 @@ CREATE TABLE `notas` (
   `valor_nota` int(11) NOT NULL,
   `periodo_id` int(11) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -253,7 +281,7 @@ CREATE TABLE `periodos` (
   `periodo_id` int(11) NOT NULL,
   `nombre_periodo` varchar(100) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `periodos`
@@ -281,7 +309,7 @@ CREATE TABLE `profesor` (
   `correo` varchar(100) NOT NULL,
   `nivel_est` varchar(100) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `profesor`
@@ -316,7 +344,7 @@ CREATE TABLE `profesor_grado` (
   `profesor_id` int(11) NOT NULL,
   `periodo_id` int(11) NOT NULL,
   `estadopg` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `profesor_grado`
@@ -340,7 +368,7 @@ INSERT INTO `profesor_grado` (`pg_id`, `grado_id`, `aula_id`, `profesor_id`, `pe
 CREATE TABLE `rol` (
   `rol_id` int(11) NOT NULL,
   `nombre_rol` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `rol`
@@ -363,7 +391,7 @@ CREATE TABLE `usuarios` (
   `clave` varchar(255) NOT NULL,
   `rol` int(11) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -380,7 +408,9 @@ INSERT INTO `usuarios` (`usuario_id`, `nombre`, `usuario`, `clave`, `rol`, `esta
 (8, 'Luisito', 'LULOS', '$2y$10$TyQ5Jw32kAiIBS39tSz3WeNYhB6WPsFOKUJwTqXBOlJT2dCaWJdWK', 1, 1),
 (9, 'Marco', 'MARE', '$2y$10$1XDxir5VYGj1Oa/H6USkouKF19/g9Nrea1VrL.NY0EoJWHeJMzSLS', 1, 1),
 (10, 'Fernando', 'FERO', '$2y$10$n9ryBmouMn0o9CQMJrc7h.Jvd4aToxQCSjj7bY0TGztvOuvV3NRE2', 1, 1),
-(11, 'More Morales', 'PEPE', '$2y$10$bzr7Mmo0KK7h6gvDNdFOx.C.doG1icxAqrAjMB4OuujNjqSfGcY.a', 1, 1);
+(11, 'More Morales', 'PEPE', '$2y$10$bzr7Mmo0KK7h6gvDNdFOx.C.doG1icxAqrAjMB4OuujNjqSfGcY.a', 1, 1),
+(13, 'Wilman daniel', 'dani', '$2y$10$qokhHzLPjm78Dwhf15nYH.gKzKMgO17y49vE.lgf4cGWr4SjJhSHG', 1, 0),
+(14, 'Elver', 'Sano', '$2y$10$TW4u2bMhcYqdXyeiRq8PX.40XAtUY.SgVoe1L0btD4NiTRJNVqYDW', 1, 0);
 
 --
 -- Índices para tablas volcadas
@@ -412,6 +442,12 @@ ALTER TABLE `alumno_profesor`
 --
 ALTER TABLE `apoderado`
   ADD PRIMARY KEY (`apoderado_id`);
+
+--
+-- Indices de la tabla `apoderadosaunnoregistrados`
+--
+ALTER TABLE `apoderadosaunnoregistrados`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `aulas`
@@ -520,7 +556,13 @@ ALTER TABLE `alumno_profesor`
 -- AUTO_INCREMENT de la tabla `apoderado`
 --
 ALTER TABLE `apoderado`
-  MODIFY `apoderado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `apoderado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `apoderadosaunnoregistrados`
+--
+ALTER TABLE `apoderadosaunnoregistrados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `aulas`
@@ -592,7 +634,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
@@ -628,6 +670,17 @@ ALTER TABLE `profesor_grado`
   ADD CONSTRAINT `profesor_grado_ibfk_1` FOREIGN KEY (`aula_id`) REFERENCES `aulas` (`aula_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `profesor_grado_ibfk_2` FOREIGN KEY (`grado_id`) REFERENCES `grados` (`grado_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `profesor_grado_ibfk_3` FOREIGN KEY (`profesor_id`) REFERENCES `profesor` (`profesor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`rol`) REFERENCES `rol` (`rol_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 --
 -- Filtros para la tabla `usuarios`
