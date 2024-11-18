@@ -118,12 +118,33 @@ document.addEventListener('DOMContentLoaded',function(){
                 return false;
             }
 
-            if (edad < 4 || edad > 14 || isNaN(edad)) {
+            var nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/;
+            if (!nombreRegex.test(nombre)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El nombre solo puede contener letras y espacios.",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            if (!Number.isInteger(Number(edad)) || edad < 3 || edad > 16) {
                 Swal.fire({
                   icon: "error",
                   title: "Atención",
-                  text: "Por favor, ingrese una edad válida entre 5 y 12 años.",
+                  text: "La edad debe estar entre 3 y 16 años.",
                   confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            if (!/^[A-Za-z0-9Ññ]{7,12}$/.test(documento)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El documento debe tener entre 7 y 12 caracteres.",
+                    confirmButtonColor: "#00695C",
                 });
                 return false;
             }

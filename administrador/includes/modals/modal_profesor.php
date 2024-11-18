@@ -10,27 +10,33 @@
           <input type="hidden" name="idprofesor" id="idprofesor" value="">
           <div class="mb-3">
             <label for="control-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" required>
+            <input type="text" class="form-control" name="nombre" id="nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="El nombre solo puede contener letras y espacios" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Dirección:</label>
             <input type="text" class="form-control" name="direccion" id="direccion" required>
           </div>
           <div class="mb-3">
-            <label for="control-label">Cédula:</label>
-            <input type="text" class="form-control" name="cedula" id="cedula" autocomplete="username" required>
+            <label for="control-label">Documento:</label>
+            <input type="text" class="form-control" name="cedula" id="cedula" autocomplete="username" pattern="^[A-Za-z0-9Ññ]{7,12}$" title="El documento debe tener entre 7 y 12 caracteres" required>
           </div>
             <div class="mb-3">
             <label for="control-label">Contraseña:</label>
-            <input type="password" class="form-control" name="clave" id="clave" minlength="6" autocomplete="current-password">
+            <div class="input-group">
+              <input type="password" class="form-control" name="clave" id="clave" minlength="6"  autocomplete="current-password">
+              <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+                <i class="fa-regular fa-eye"></i>
+              </span>
+            </div>
             </div>
           <div class="mb-3">
-            <label for="control-label">Telefono:</label>
-            <input type="text" class="form-control" name="telefono" id="telefono" pattern="^[0-9]+$" title="Solo se permiten números" required>
+            <label for="control-label">Teléfono:</label>
+            <input type="text" class="form-control" name="telefono" id="telefono" pattern="^\d{7,15}$" 
+            title="El teléfono debe contener entre 7 y 15 dígitos." required>
           </div>
           <div class="mb-3">
             <label for="control-label">Correo:</label>
-            <input type="email" class="form-control" name="correo" id="correo" required>
+            <input type="text" class="form-control" name="correo" id="correo" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$|^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-zÑñ]{2,}$" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Nivel de estudio:</label>

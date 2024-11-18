@@ -14,6 +14,11 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="listProfesor">Seleccione la Materia:</label>
+                <select class="form-control" name="listMateria" id="listMateria">
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="listGrado">Seleccione el Grado:</label>
                 <select class="form-control" name="listGrado" id="listGrado">
                 </select>

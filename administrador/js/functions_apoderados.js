@@ -90,6 +90,32 @@ document.addEventListener('DOMContentLoaded',function(){
         "iDisplayLength": 10,
         "order": [[0,"asc"]]
     });
+
+    // Manejo del ícono para mostrar/ocultar la contraseña
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordField = document.getElementById("clave");
+
+    // Mostrar contraseña mientras se mantiene presionado el ícono
+    togglePassword.addEventListener("mousedown", function () {
+        passwordField.type = "text"; // Cambia a texto visible
+    });
+
+    // Ocultar contraseña al soltar el ícono
+    togglePassword.addEventListener("mouseup", function () {
+        passwordField.type = "password"; // Regresa a modo oculto
+    });
+
+    // Por si el usuario arrastra el cursor fuera del ícono mientras presiona
+    togglePassword.addEventListener("mouseleave", function () {
+        passwordField.type = "password"; // Regresa a modo oculto
+    });
+
+    $('#modalApoderado').on('show.bs.modal', function (e) {
+        // Limpiar el campo de la contraseña al abrir el modal para editar otro usuario
+        document.querySelector('#clave').value = '';
+        document.querySelector('#clave').type = 'password'; // Asegúrate de que el campo de contraseña sea oculto por defecto
+    });
+
     var formApoderado = document.querySelector('#formApoderado');
     if (formApoderado) {
         formApoderado.onsubmit =function(e){
@@ -114,34 +140,56 @@ document.addEventListener('DOMContentLoaded',function(){
                 return false;
             }
 
-            if (!/^\d+$/.test(telefono)) {
+            var nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/;
+            if (!nombreRegex.test(nombre)) {
                 Swal.fire({
                     icon: "error",
                     title: "Atención",
-                    text: "El telefono no es válido",
+                    text: "El nombre solo puede contener letras y espacios.",
                     confirmButtonColor: "#00695C",
                 });
                 return false;
             }
 
-            var correoRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!/^[A-Za-z0-9Ññ]{7,12}$/.test(documento)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El documento debe tener entre 7 y 12 caracteres.",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            if (clave && clave !== '') {
+                var contraRegex = /^(?=.*[a-záéíóúñ])(?=.*[A-ZÁÉÍÓÚÑÑ])(?=.*\d).{6,}$/;
+                if (!contraRegex.test(clave)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Atención",
+                        text: "La contraseña debe tener una letra mayúscula, una minúscula y un número.",
+                        confirmButtonColor: "#00695C",
+                    });
+                    return false;
+                }
+            }
+
+            if (!/^\d{7,15}$/.test(telefono)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El teléfono debe tener entre 7 y 15 dígitos.",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            var correoRegex = /^[a-zA-Z0-9Ññ._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!correoRegex.test(correo)) {
                 Swal.fire({
-                    icon: "error",
+                    icon: "error",  
                     title: "Atención",
                     text: "El correo electrónico no es válido",
-                    confirmButtonColor: "#00695C",
-                });
-                return false;
-            }
-
-            const telefonoInt = BigInt(telefono);
-            const maxBigInt = 9223372036854775807n;
-            if (telefonoInt < 0 || telefonoInt > maxBigInt) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Atención",
-                    text: "El teléfono supera el máximo permitido",
                     confirmButtonColor: "#00695C",
                 });
                 return false;

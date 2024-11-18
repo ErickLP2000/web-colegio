@@ -16,10 +16,76 @@ document.addEventListener('DOMContentLoaded',function(){
             {"data": "acciones"},
             {"data": "pg_id"},
             {"data": "nombre"},
+            {"data": "nombre_materia"},            
             {"data": "nombre_grado"},
             {"data": "nombre_aula"},
             {"data": "nombre_periodo"},
             {"data": "estadopg"}
+        ],
+        "dom": 'lBfrtip',
+        "buttons": [
+            {
+                "extend":"copy",
+                "text": "Copiar",
+                "titleAttr": "Copiar",
+                "className": "btn btn-secondary",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                }
+            },
+            {
+                "extend":"excel",
+                "text": '<i class="fa-solid fa-file-excel"></i>',
+                "titleAttr": "Exportar a excel",
+                "className": "btn btn-success",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                },
+                "filename": "Lista_Profesor_Grado_XLSX",
+                "title": "Lista de Profesor Grado",
+            },
+            
+            {
+                "extend":"pdf",
+                "text": '<i class="fa-solid fa-file-pdf"></i>',
+                "titleAttr": "Exportar a pdf",
+                "className": "btn btn-danger",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                },
+                "filename": "Lista_Profesor_Grado_PDF",
+                "title": "Lista de Profesor Grado",   
+                "customize": function (doc) {
+                    doc.styles.title = {
+                        fontSize: 20,  
+                        bold: true,
+                        alignment: 'center'
+                    };   
+                    doc.content[1].table.widths = ['3%', '32%', '18%', '18%', '8%', '12%', '9%'];
+                    doc.styles.tableHeader.fontSize = 12;
+                    doc.pageMargins = [ 20, 40, 20, 30 ];
+                    doc.defaultStyle.fontSize = 10;
+                }
+            },
+
+            {
+                "extend":"print",
+                "text": '<i class="fa-solid fa-print"></i>',
+                "titleAttr": "Imprimir",
+                "className": "btn btn-info",
+                "exportOptions": {
+                    "columns": ':not(:eq(0))'
+                },
+                "customize": function (win) {
+                $(win.document.body)
+                    .css('font-size', '10pt')
+                    .prepend('<h3>Lista de Profesor Grado</h3>')
+                }
+            },
+            {
+                "extend":"colvis",
+                "text": "Filtrar Columnas"
+            }
         ],
         "responsive": true,
         "bDestroy": true,
@@ -33,12 +99,13 @@ document.addEventListener('DOMContentLoaded',function(){
             
             var idprofesorgrado =document.querySelector('#idprofesorgrado').value;
             var nombre = document.querySelector('#listProfesor').value;
+            var materia = document.querySelector('#listMateria').value;
             var grado = document.querySelector('#listGrado').value;
             var aula = document.querySelector('#listAula').value;
             var periodo = document.querySelector('#listPeriodo').value;
             var estado = document.querySelector('#listEstado').value;
             
-            if(nombre == '' || grado == '' || aula == '' || periodo == '' || estado == ''){
+            if(nombre == '' || materia == '' || grado == '' || aula == '' || periodo == '' || estado == ''){
                 Swal.fire({
                     icon: "error",
                     title: "Atención",
@@ -92,6 +159,9 @@ window.addEventListener('load',function(){
     if(document.querySelector('#listProfesor')){
         showProfesor();
     }
+    if(document.querySelector('#listMateria')){
+        showMateria();
+    }
     if(document.querySelector('#listGrado')){
         showGrado();
     }
@@ -115,6 +185,22 @@ function showProfesor(){
                 data += '<option value="'+valor.profesor_id+'">'+valor.nombre+'</option>'
             });
             document.querySelector('#listProfesor').innerHTML = data;
+        }
+    };
+}
+
+function showMateria(){
+    var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+    var url = 'models/options/options-materia.php';
+    request.open('GET',url,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status ==200){
+            var data = JSON.parse(request.responseText);
+            data.forEach(function(valor){
+                data += '<option value="'+valor.materia_id+'">'+valor.nombre_materia+'</option>'
+            });
+            document.querySelector('#listMateria').innerHTML = data;
         }
     };
 }
