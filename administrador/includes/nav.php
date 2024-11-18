@@ -17,7 +17,8 @@
         <li><a class="app-menu__item" href="lista_materias.php"><i class="app-menu__icon fa-solid fa-book"></i><span class="app-menu__label">Materias</span></a></li>
         <li><a class="app-menu__item" href="lista_periodos.php"><i class="app-menu__icon fa-solid fa-book"></i></i><span class="app-menu__label">Periodos</span></a></li>
         <li><a class="app-menu__item" href="lista_actividades.php"><i class="app-menu__icon fa-solid fa-book"></i></i><span class="app-menu__label">Actividades</span></a></li>
-        <li><a class="app-menu__item" href="lista_profesor_grados.php"><i class="app-menu__icon fa-solid fa-book"></i><span class="app-menu__label">Profesor Grado</span></a></li>
+        <li><a class="app-menu__item" href="lista_profesor_grados.php"><i class="app-menu__icon fa-solid fa-tachograph-digital"></i><span class="app-menu__label">Profesor Grado</span></a></li>
+        <li><a class="app-menu__item" href="lista_profesor_alumnos.php"><i class="app-menu__icon fa-solid fa-chalkboard"></i><span class="app-menu__label">Profesor Alumno</span></a></li>
         <li><a class="app-menu__item" href="../logout.php"><i class="app-menu__icon fa-solid fa-right-from-bracket"></i><span class="app-menu__label">Logout</span></a></li>
       </ul>
     </aside>

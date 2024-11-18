@@ -16,5 +16,6 @@
     <script src="js/functions_periodos.js"></script>
     <script src="js/functions_actividades.js"></script>
     <script src="js/functions_profesor_grados.js"></script>
+    <script src="js/functions_profesor_alumnos.js"></script>
   </body>
 </html>
