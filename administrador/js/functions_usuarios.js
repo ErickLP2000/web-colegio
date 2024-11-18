@@ -90,6 +90,31 @@ document.addEventListener('DOMContentLoaded',function(){
         "iDisplayLength": 10,
         "order": [[0,"asc"]]
     });
+    // Manejo del ícono para mostrar/ocultar la contraseña
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordField = document.getElementById("clave");
+
+    // Mostrar contraseña mientras se mantiene presionado el ícono
+    togglePassword.addEventListener("mousedown", function () {
+        passwordField.type = "text"; // Cambia a texto visible
+    });
+
+    // Ocultar contraseña al soltar el ícono
+    togglePassword.addEventListener("mouseup", function () {
+        passwordField.type = "password"; // Regresa a modo oculto
+    });
+
+    // Por si el usuario arrastra el cursor fuera del ícono mientras presiona
+    togglePassword.addEventListener("mouseleave", function () {
+        passwordField.type = "password"; // Regresa a modo oculto
+    });
+
+    $('#modalusuario').on('show.bs.modal', function (e) {
+        // Limpiar el campo de la contraseña al abrir el modal para editar otro usuario
+        document.querySelector('#clave').value = '';
+        document.querySelector('#clave').type = 'password'; // Asegúrate de que el campo de contraseña sea oculto por defecto
+    });
+
     var formUsuario = document.querySelector('#formUsuario');
     if(formUsuario){
         formUsuario.onsubmit =function(e){
@@ -110,6 +135,30 @@ document.addEventListener('DOMContentLoaded',function(){
                     confirmButtonColor: "#00695C",
                 });
                 return false;
+            }
+
+            var nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/;
+            if (!nombreRegex.test(nombre)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El nombre solo puede contener letras y espacios.",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            if (clave && clave !== '') {
+                var contraRegex = /^(?=.*[a-záéíóúñ])(?=.*[A-ZÁÉÍÓÚÑÑ])(?=.*\d).{6,}$/;
+                if (!contraRegex.test(clave)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Atención",
+                        text: "La contraseña debe tener una letra mayúscula, una minúscula y un número.",
+                        confirmButtonColor: "#00695C",
+                    });
+                    return false;
+                }
             }
 
             var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
@@ -143,6 +192,8 @@ document.addEventListener('DOMContentLoaded',function(){
         };
     }
 });
+
+
 
 function openModalUsuario(){
     document.querySelector('#idusuario').value='';

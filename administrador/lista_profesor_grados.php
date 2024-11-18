@@ -25,6 +25,7 @@ require_once 'includes/modals/modal_profesor_grado.php'
                       <th>ACCIONES</th>
                       <th>ID</th>
                       <th>NOMBRE DE PROFESOR</th>
+                      <th>MATERIA</th>
                       <th>GRADO</th>
                       <th>AULA</th>
                       <th>PERIODO</th>

@@ -10,11 +10,11 @@
           <input type="hidden" name="idalumno" id="idalumno" value="">
           <div class="mb-3">
             <label for="control-label">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombre" required>
+            <input type="text" class="form-control" name="nombre" id="nombre" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="El nombre solo puede contener letras y espacios" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Edad:</label>
-            <input type="number" class="form-control" name="edad" id="edad" required min="3" max="14" required>
+            <input type="number" class="form-control" name="edad" id="edad" required min="3" max="16" required>
           </div>
           <div class="mb-3">
             <label for="control-label">Dirección:</label>
@@ -22,7 +22,7 @@
           </div>
           <div class="mb-3">
             <label for="control-label">Documento:</label>
-            <input type="text" class="form-control" name="documento" id="documento" autocomplete="username" required>
+            <input type="text" class="form-control" name="documento" id="documento" pattern="^[A-Za-z0-9Ññ]{7,12}$" title="El documento debe tener entre 7 y 12 caracteres" autocomplete="username" required>
           </div>
           <div class="mb-3">
                 <label for="listApoderado">Apoderado:</label>

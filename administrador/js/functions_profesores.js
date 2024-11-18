@@ -115,18 +115,52 @@ document.addEventListener('DOMContentLoaded',function(){
                 });
                 return false;
             }
-
-            if (!/^\d+$/.test(telefono)) {
+            
+            var nombreRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*$/;
+            if (!nombreRegex.test(nombre)) {
                 Swal.fire({
                     icon: "error",
                     title: "Atención",
-                    text: "El telefono no es válido",
+                    text: "El nombre solo puede contener letras y espacios.",
                     confirmButtonColor: "#00695C",
                 });
                 return false;
             }
 
-            var correoRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!/^[A-Za-z0-9Ññ]{7,12}$/.test(cedula)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El documento debe tener entre 7 y 12 caracteres.",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            if (clave && clave !== '') {
+                var contraRegex = /^(?=.*[a-záéíóúñ])(?=.*[A-ZÁÉÍÓÚÑÑ])(?=.*\d).{6,}$/;
+                if (!contraRegex.test(clave)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Atención",
+                        text: "La contraseña debe tener una letra mayúscula, una minúscula y un número.",
+                        confirmButtonColor: "#00695C",
+                    });
+                    return false;
+                }
+            }
+
+            if (!/^\d{7,15}$/.test(telefono)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "El teléfono debe tener entre 7 y 15 dígitos.",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
+            var correoRegex = /^[a-zA-Z0-9Ññ._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!correoRegex.test(correo)) {
                 Swal.fire({
                     icon: "error",
@@ -137,17 +171,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 return false;
             }
 
-            const telefonoInt = BigInt(telefono);
-            const maxBigInt = 9223372036854775807n;
-            if (telefonoInt < 0 || telefonoInt > maxBigInt) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Atención",
-                    text: "El teléfono supera el máximo permitido",
-                    confirmButtonColor: "#00695C",
-                });
-                return false;
-            }
+            
 
             var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
             var url = 'models/profesores/ajax-profesores.php';
