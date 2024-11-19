@@ -38,7 +38,7 @@ $row = $query ->rowCount();
                 <p class="col text-end">
                     <button class="btn btn-info icon-btn" onclick="editarContenido(<?= $data['contenido_id']; ?>)"><i class="fa-solid fa-pen-to-square"></i> Editar Contenido</button> 
                     <button class="btn btn-danger icon-btn" onclick="eliminarContenido(<?= $data['contenido_id']; ?>)"><i class="fa-solid fa-trash"></i> Eliminar Contenido</button> 
-                    <button class="btn btn-warning icon-btn" href="evaluacion.php?curso=<?= $data['pg_id']; ?>&contenido=<?= $data['contenido_id']; ?>"><i class="fa-solid fa-list"></i> Asignar Evaluación</button>
+                    <a class="btn btn-warning icon-btn" href="evaluacion.php?curso=<?= $data['pg_id']; ?>&contenido=<?= $data['contenido_id']; ?>"><i class="fa-solid fa-list"></i> Asignar Evaluación</a>
                 </p>
               </div>
               <div class="title-body">
@@ -63,7 +63,7 @@ $row = $query ->rowCount();
       } ?>
       </div>
       <div class="">
-        <a href="index.php" class="btn btn-info text-white"><< Volver Atrás</a>
+        <a href="index.php" class="btn btn-info"><< Volver Atrás</a>
       </div>
     </main>
 

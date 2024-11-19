@@ -43,7 +43,7 @@ $row = $query ->rowCount();
                 <h5 class="card-title text-center"><?= $data['nombre_materia'] ?></h5>
                 <p class="card-text">Grado: <kbd class="bg-info"><?= $data['nombre_grado'] ?></kbd> - Aula: <kbd class="bg-info"><?= $data['nombre_aula'] ?></kbd></p>
                 <a href="contenido.php?curso=<?= $data['pg_id'] ?>" class="btn btn-primary">Acceder</a>
-                <a href="alumnos.php?curso="<?= $data['pg_id'] ?> class="btn btn-warning">Ver Alumnos</a>
+                <a href="alumnos.php?curso=<?= $data['pg_id'] ?>" class="btn btn-warning">Ver Alumnos</a>
               </div>
             </div>
           </div>
