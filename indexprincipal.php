@@ -75,17 +75,22 @@
   }
 
   // Función para validar el correo electrónico
-  function validateEmail(event) {
-    const input = event.target.value;
-    // Expresión regular actualizada para permitir caracteres especiales
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+ // Validar Correo Electrónico 
+// Validar Correo Electrónico 
+// Validar Correo Electrónico 
+var correoInput = document.getElementById('correo_apoderado');
+var regexCorreo = /^[a-zA-ZñÑ0-9._%+-]+@[a-zA-ZñÑ0-9.-]+\.[a-zA-ZñÑ]{2,}$/;
 
-    if (!emailPattern.test(input)) {
-      event.target.setCustomValidity("Por favor, ingrese un correo electrónico válido.");
-    } else {
-      event.target.setCustomValidity("");
-    }
-  }
+if (!regexCorreo.test(correoInput.value)) {
+  isValid = false;
+  alert("Correo electrónico no es válido");
+}
+
+if (!isValid) {
+  event.preventDefault();
+}
+
+
   </script>
 
 </head>
@@ -194,8 +199,8 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="correo_apoderado">Ingresar correo del apoderado</label>
-                    <input type="email" name="correo_apoderado" id="correo_apoderado" class="form-control"
-                      placeholder="Correo electrónico" required oninput="validateEmail(event)">
+                    <input type="text" name="correo_apoderado" id="correo_apoderado" class="form-control"
+                      >
                   </div>
                 </div>
               </div>
@@ -396,7 +401,7 @@
 
     // Validar que solo se ingresen letras en campos de texto
     var textoInputs = document.querySelectorAll(
-      'input[type="text"]:not(#telefono_apoderado):not(#dni_apoderado):not(#direccion_apoderado)');
+      'input[type="text"]:not(#telefono_apoderado):not(#dni_apoderado):not(#direccion_apoderado)not(#correo_apoderado)');
     textoInputs.forEach(function(input) {
       var regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
       if (!regex.test(input.value)) {
@@ -418,15 +423,10 @@
       isValid = false;
       alert("Teléfono debe contener 9 dígitos");
     }
-    /* // Validar Correo Electrónico 
-    var correoInput = document.getElementById('correo_apoderado');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correoInput.value)) {
-      isValid = false;
-      alert("Correo electrónico no es válido");
-    }
-    if (!isValid) {
-      event.preventDefault();
-    } */
+   // Validar Correo Electrónico 
+
+
+    
   });
   </script>
 
