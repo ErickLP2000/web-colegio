@@ -5,5 +5,6 @@
     <script src="../js/main.js"></script>
     <script src="../js/plugins/datatables.min.js"></script>
     <!-- Page specific javascripts-->
+    <script src="js/functions_contenidos.js"></script>
   </body>
 </html>
