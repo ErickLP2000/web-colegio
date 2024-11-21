@@ -35,7 +35,7 @@ if(!empty($_POST)){
             if($idcontenido==0){
                 $sqlInsert = 'INSERT INTO contenidos (nombre_contenido,descripcion,material,pg_id) VALUES (?,?,?,?)';
                 $queryInsert = $pdo->prepare($sqlInsert);
-                $request = $queryInsert->execute(array($nombre,$descripcion,$material,$idcurso));
+                $request = $queryInsert->execute(array($nombre,$descripcion,$destino,$idcurso));
                     move_uploaded_file($url_temp,$destino);
                 $accion =1;
             }else{

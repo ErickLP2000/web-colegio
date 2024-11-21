@@ -50,7 +50,7 @@ $row = $query ->rowCount();
                         <div class="input-group-text">
                           <i class="fa-solid fa-download"></i>
                         </div>
-                        <a class="btn btn-primary <?= empty($data['material']) ? 'disabled' : ''; ?>" href="<?= !empty($data['material']) ? 'profesor/profesor/' . $data['material'] : '#'; ?>" target="_blank">
+                        <a class="btn btn-primary" href="profesor/profesor/<?= $data['material']; ?>" target="_blank">
                           Material de Descarga
                         </a>
                     </div>
