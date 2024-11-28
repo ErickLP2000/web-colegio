@@ -1,5 +1,4 @@
 <?php
-
 require_once '../../../includes/conexion.php';
 
 if ($_POST) {
@@ -12,15 +11,26 @@ if ($_POST) {
     $apoderado = $query_check->fetch(PDO::FETCH_ASSOC);
 
     if ($apoderado) {
-        // Eliminar el apoderado de la base de datos
-        $sql = "DELETE FROM apoderado WHERE apoderado_id = ?";
-        $query = $pdo->prepare($sql);
-        $result = $query->execute(array($idapoderado));
+        // Verificar si el apoderado tiene alumnos asignados
+        $sql_alumnos_check = "SELECT COUNT(*) as total FROM alumnos WHERE apoderado_id = ?";
+        $query_alumnos_check = $pdo->prepare($sql_alumnos_check);
+        $query_alumnos_check->execute(array($idapoderado));
+        $alumnos_asignados = $query_alumnos_check->fetch(PDO::FETCH_ASSOC);
 
-        if ($result) {
-            $respuesta = array('status' => true, 'msg' => 'Apoderado eliminado correctamente');
+        if ($alumnos_asignados['total'] > 0) {
+            // Si tiene alumnos asignados, no permitir la eliminación
+            $respuesta = array('status' => false, 'msg' => 'El apoderado tiene alumnos asignados');
         } else {
-            $respuesta = array('status' => false, 'msg' => 'Error al eliminar');
+            // Si no tiene alumnos asignados, proceder a la eliminación
+            $sql = "DELETE FROM apoderado WHERE apoderado_id = ?";
+            $query = $pdo->prepare($sql);
+            $result = $query->execute(array($idapoderado));
+
+            if ($result) {
+                $respuesta = array('status' => true, 'msg' => 'Apoderado eliminado correctamente');
+            } else {
+                $respuesta = array('status' => false, 'msg' => 'Error al eliminar');
+            }
         }
     } else {
         $respuesta = array('status' => false, 'msg' => 'Apoderado no encontrado');
