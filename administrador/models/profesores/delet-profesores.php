@@ -2,17 +2,30 @@
 
 require_once '../../../includes/conexion.php';
 
-if($_POST){
-    $idprofesor=$_POST['idprofesor'];
+if ($_POST) {
+    $idprofesor = $_POST['idprofesor'];
 
-    $sql="UPDATE profesor SET estado =0 WHERE profesor_id =?";
-    $query = $pdo->prepare($sql);
-    $result = $query->execute(array($idprofesor));
+    // Verificar si el profesor existe antes de eliminar
+    $sql_check = "SELECT * FROM profesor WHERE profesor_id = ?";
+    $query_check = $pdo->prepare($sql_check);
+    $query_check->execute(array($idprofesor));
+    $profesor = $query_check->fetch(PDO::FETCH_ASSOC);
 
-    if($result){
-        $respuesta =array('status'=> true,'msg'=>'Profesor eliminado correctamente');
-    }else{
-        $respuesta =array('status'=> false,'msg'=>'Error al eliminar');
+    if ($profesor) {
+        // Eliminar el profesor de la base de datos
+        $sql = "DELETE FROM profesor WHERE profesor_id = ?";
+        $query = $pdo->prepare($sql);
+        $result = $query->execute(array($idprofesor));
+
+        if ($result) {
+            $respuesta = array('status' => true, 'msg' => 'Profesor eliminado correctamente');
+        } else {
+            $respuesta = array('status' => false, 'msg' => 'Error al eliminar');
+        }
+    } else {
+        $respuesta = array('status' => false, 'msg' => 'Profesor no encontrado');
     }
-    echo json_encode($respuesta,JSON_UNESCAPED_UNICODE);
+
+    echo json_encode($respuesta, JSON_UNESCAPED_UNICODE);
 }
+?>
