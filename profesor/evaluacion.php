@@ -40,7 +40,7 @@ $row = $query ->rowCount();
                     <button class="btn btn-info icon-btn" onclick="editarEvaluacion(<?= $data['evaluacion_id']; ?>)"><i class="fa-solid fa-pen-to-square"></i> Editar Evaluación</button> 
                     <button class="btn btn-danger icon-btn" onclick="eliminarEvaluacion(<?= $data['evaluacion_id']; ?>)"><i class="fa-solid fa-trash"></i> Eliminar Evaluación</button> 
                     <a class="btn btn-warning icon-btn" 
-                      href="entregas.php?curso=<?= $curso ?>&contenido=<?= $data['contenido_id']; ?>$eva=<?= $data['evaluacion_id']; ?>">
+                      href="entregas.php?curso=<?= $curso ?>&contenido=<?= $data['contenido_id']; ?>&eva=<?= $data['evaluacion_id']; ?>">
                       <i class="fa-solid fa-list"></i> Asignar Entregas
                     </a>
                 </p>

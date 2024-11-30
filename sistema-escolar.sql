@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2024 a las 04:40:45
+-- Tiempo de generación: 30-11-2024 a las 08:02:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -76,7 +76,8 @@ INSERT INTO `alumnos` (`alumno_id`, `nombre_alumno`, `edad`, `direccion`, `docum
 (9, 'More', 10, 'Comas', '11111111', 1, '2024-11-22', '2024-12-04', 1),
 (10, 'Jose ÑuÑez', 12, 'Comas', '121541', 1, '2024-11-11', '2024-11-27', 1),
 (11, 'Andres', 10, 'Lima', '91165161', 1, '2024-11-15', '2024-11-30', 1),
-(12, 'Luis Nogueraa', 10, 'Comas', '1231442', 1, '2024-11-22', '2024-11-23', 1);
+(12, 'Luis Nogueraa', 10, 'Comas', '1231442', 1, '2024-11-22', '2024-11-23', 1),
+(13, 'Ñoño Ñandu', 10, 'Jr. Los Olivos 567, Arequipa', '74951614', 10, '2024-11-14', '2024-11-22', 1);
 
 -- --------------------------------------------------------
 
@@ -146,6 +147,32 @@ INSERT INTO `apoderado` (`apoderado_id`, `nombre_apoderado`, `direccion`, `docum
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `apoderadosaunnoregistrados`
+--
+
+CREATE TABLE `apoderadosaunnoregistrados` (
+  `id` int(11) NOT NULL,
+  `nombre_apoderado` varchar(200) NOT NULL,
+  `apellido_apoderado` varchar(255) NOT NULL,
+  `direccion_apoderado` varchar(255) NOT NULL,
+  `telefono_apoderado` bigint(20) NOT NULL,
+  `dni_apoderado` varchar(200) NOT NULL,
+  `correo_apoderado` varchar(200) NOT NULL,
+  `nombre_estudiante` varchar(200) NOT NULL,
+  `apellido_estudiante` varchar(200) NOT NULL,
+  `grado_estudiante` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `apoderadosaunnoregistrados`
+--
+
+INSERT INTO `apoderadosaunnoregistrados` (`id`, `nombre_apoderado`, `apellido_apoderado`, `direccion_apoderado`, `telefono_apoderado`, `dni_apoderado`, `correo_apoderado`, `nombre_estudiante`, `apellido_estudiante`, `grado_estudiante`) VALUES
+(1, 'Ñaño', 'Ñunez', 'Los olivos', 975135848, '76616561', 'ñañoñin@gmail.com', 'Ñoño', 'Ñandu', '1ero de primaria');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `aulas`
 --
 
@@ -196,10 +223,16 @@ CREATE TABLE `contenidos` (
 --
 
 INSERT INTO `contenidos` (`contenido_id`, `nombre_contenido`, `descripcion`, `material`, `pg_id`) VALUES
-(1, 'Tarea 01', 'Realizar un informe de la cultura incas', '../../../uploads/8641/Lista_Profesor_Grado_PDF.pdf', 6),
+(1, 'Tarea 01', 'Realizar un informe de la cultura incas', '../../../uploads/7140/photo.cdr', 6),
 (2, 'Taller 01', 'Realizar una presentación de historias', '../../../uploads/4938/curso.jpg', 6),
 (3, 'Exposicion 01', 'asdasd', '../../../uploads/3780/Lista_Profesor_Grado_PDF.pdf', 6),
-(6, 'Expo', 'asfadfasfdasd', '', 21);
+(6, 'Expo', 'asfadfasfdasd', '', 21),
+(7, 'asdasd', 'Inve', '../../../uploads/2813/conte.png', 7),
+(8, 'asdas', 'asdasd', '../../../uploads/5340/grad.png', 6),
+(13, 'Andres', 'asdasdasda', '../../../uploads/4041/perio.png', 6),
+(14, 'fhfbwjehbfw', 'asfasfasdasd', '../../../uploads/6268/sistema-escolar.sql', 6),
+(15, 'More', 'asdasdas', '../../../uploads/2706/', 6),
+(16, 'Tarde', 'asdasdad', '../../../uploads/8012/', 6);
 
 -- --------------------------------------------------------
 
@@ -213,10 +246,16 @@ CREATE TABLE `evaluaciones` (
   `descripcion` varchar(255) NOT NULL,
   `fecha` date NOT NULL,
   `porcentaje` varchar(100) NOT NULL,
-  `materia_id` int(11) NOT NULL,
-  `periodo_id` int(11) NOT NULL,
   `contenido_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `evaluaciones`
+--
+
+INSERT INTO `evaluaciones` (`evaluacion_id`, `nombre_evaluacion`, `descripcion`, `fecha`, `porcentaje`, `contenido_id`) VALUES
+(2, 'Prueba', 'Insercion', '2024-11-28', '10%', 1),
+(3, 'Andres', 'sdasd', '2024-11-06', '20%', 1);
 
 -- --------------------------------------------------------
 
@@ -226,11 +265,19 @@ CREATE TABLE `evaluaciones` (
 
 CREATE TABLE `ev_entregadas` (
   `ev_entregada_id` int(11) NOT NULL,
-  `material` varchar(255) NOT NULL,
+  `material_alumno` varchar(255) NOT NULL,
   `observacion` varchar(255) NOT NULL,
   `evaluacion_id` int(11) NOT NULL,
   `alumno_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ev_entregadas`
+--
+
+INSERT INTO `ev_entregadas` (`ev_entregada_id`, `material_alumno`, `observacion`, `evaluacion_id`, `alumno_id`) VALUES
+(1, 'prueva', 'obs', 2, 4),
+(2, 'prueva', 'obs', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -298,13 +345,18 @@ INSERT INTO `materias` (`materia_id`, `nombre_materia`, `estado`) VALUES
 
 CREATE TABLE `notas` (
   `nota_id` int(11) NOT NULL,
-  `materia_id` int(11) NOT NULL,
-  `alumno_id` int(11) NOT NULL,
-  `actividad_id` int(11) NOT NULL,
+  `ev_entregada_id` int(11) NOT NULL,
   `valor_nota` int(11) NOT NULL,
-  `periodo_id` int(11) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `notas`
+--
+
+INSERT INTO `notas` (`nota_id`, `ev_entregada_id`, `valor_nota`, `fecha`) VALUES
+(16, 1, 15, '2024-11-30 00:43:54'),
+(18, 2, 20, '2024-11-30 00:47:05');
 
 -- --------------------------------------------------------
 
@@ -352,7 +404,7 @@ CREATE TABLE `profesor` (
 
 INSERT INTO `profesor` (`profesor_id`, `nombre`, `direccion`, `cedula`, `clave`, `telefono`, `correo`, `nivel_est`, `estado`) VALUES
 (4, 'Juan Carlos Fernández García', 'Caracas', '123456789', '$2y$10$ZgfR2ZDRpspLO6GDbAlif.UUo4I7jXq7JDjXbxWhv2GX1oy9.y3AW', 942158348, 'luis@gmail.com', 'Técnico', 1),
-(5, 'María José Rodríguez López', 'Caracas', '1234567', '$2y$10$U2oztuWdzsZN89zH6Rr4D.9t4gpMCiwN/flDfWx9QdEEIPPYajLgi', 942158348, 'luis@gmail.com', 'Ingeniero de Sistemas', 1),
+(5, 'María José Rodríguez López', 'Caracas', '73253955', '$2y$10$XTDgv7aOKqZV8T67kFC.DuMfWQzi4kVWLs7VMazzlQFJjCHjp2tqq', 942158348, 'luis@gmail.com', 'Ingeniero de Sistemas', 1),
 (6, 'Andres', 'Caracas', '4861231', '$2y$10$pOXekRLk8CWqO0iRNijouuybjFQmMRiQ5/DGLQxXVBEZ3IVMFwEtC', 94215491, 'andre@gmail.com', 'Ingeniero de Sistemas', 0),
 (7, 'Luis Alberto Martínez Pérez', 'Caracas', '549611', '$2y$10$ml8VYOYsV6wSCw/DVzsj7uzr6DN6QtHOwd8Y9oGV4M1tXmhVUWe2m', 942154918, 'andru@gmail.com', 'Ingeniero de Sistemas', 1),
 (8, 'Jomar', 'Callao', '14952', '$2y$10$UBzBKtql3PxDzJZQ7exlCe.jtJmOSVpHw6eZ4x.m/EKE1mkoKHFVW', 938157492, 'jomar@gmail.com', 'Técnico', 0),
@@ -367,6 +419,37 @@ INSERT INTO `profesor` (`profesor_id`, `nombre`, `direccion`, `cedula`, `clave`,
 (17, 'Claudia Beatriz Herrera Álvarez', 'Comas', '12345672', '$2y$10$le4E4F/sx5VXpE8aoSEl3eJ5Rumv32VOfkOWb4Fz8UwnQhC4hbH9O', 9451235, 'miqui@gmail.com', 'Técnico', 1),
 (18, 'Ángel David Peña Flores', 'Lima', '72495318', '$2y$10$zilCviBTXSjwylxzYO1BVezIets4mv2tP5hKwzwTYC0zU1Avrpl1q', 935782416, 'angel.pena@gmail.com', 'Técnico', 1),
 (19, 'Lucía Fernanda Blanco Silva', 'Comas', '75422848', '$2y$10$2tZ2YS2bbYzSKifvHDt9LeqI3YtycBRhO75C2IYFVfXn37mwbs8ki', 954233655, 'lucia.blanco@gmail.com', 'Técnico', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `profesor_alumno`
+--
+
+CREATE TABLE `profesor_alumno` (
+  `pa_id` int(11) NOT NULL,
+  `alumno_id` int(11) NOT NULL,
+  `pg_id` int(11) NOT NULL,
+  `periodo_id` int(11) NOT NULL,
+  `estadopa` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `profesor_alumno`
+--
+
+INSERT INTO `profesor_alumno` (`pa_id`, `alumno_id`, `pg_id`, `periodo_id`, `estadopa`) VALUES
+(4, 4, 6, 4, 0),
+(5, 8, 6, 7, 1),
+(6, 4, 6, 7, 1),
+(7, 10, 6, 7, 1),
+(8, 5, 6, 7, 1),
+(9, 11, 22, 7, 1),
+(10, 4, 26, 7, 1),
+(11, 4, 21, 7, 1),
+(12, 4, 23, 7, 1),
+(13, 4, 24, 7, 1),
+(14, 4, 25, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -409,7 +492,8 @@ INSERT INTO `profesor_grado` (`pg_id`, `grado_id`, `aula_id`, `profesor_id`, `ma
 (23, 7, 7, 4, 9, 7, 1),
 (24, 7, 7, 4, 10, 7, 1),
 (25, 7, 7, 4, 11, 7, 1),
-(26, 7, 7, 4, 12, 7, 1);
+(26, 7, 7, 4, 12, 7, 1),
+(27, 8, 8, 5, 7, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -487,6 +571,12 @@ ALTER TABLE `apoderado`
   ADD PRIMARY KEY (`apoderado_id`);
 
 --
+-- Indices de la tabla `apoderadosaunnoregistrados`
+--
+ALTER TABLE `apoderadosaunnoregistrados`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `aulas`
 --
 ALTER TABLE `aulas`
@@ -504,9 +594,7 @@ ALTER TABLE `contenidos`
 --
 ALTER TABLE `evaluaciones`
   ADD PRIMARY KEY (`evaluacion_id`),
-  ADD KEY `contenido_id` (`contenido_id`),
-  ADD KEY `materia_id` (`materia_id`),
-  ADD KEY `periodo_id` (`periodo_id`);
+  ADD KEY `contenido_id` (`contenido_id`);
 
 --
 -- Indices de la tabla `ev_entregadas`
@@ -533,10 +621,7 @@ ALTER TABLE `materias`
 --
 ALTER TABLE `notas`
   ADD PRIMARY KEY (`nota_id`),
-  ADD KEY `materia_id` (`materia_id`),
-  ADD KEY `alumno_id` (`alumno_id`),
-  ADD KEY `actividad_id` (`actividad_id`),
-  ADD KEY `periodo_id` (`periodo_id`);
+  ADD KEY `ev_entregadas_id` (`ev_entregada_id`);
 
 --
 -- Indices de la tabla `periodos`
@@ -549,6 +634,15 @@ ALTER TABLE `periodos`
 --
 ALTER TABLE `profesor`
   ADD PRIMARY KEY (`profesor_id`);
+
+--
+-- Indices de la tabla `profesor_alumno`
+--
+ALTER TABLE `profesor_alumno`
+  ADD PRIMARY KEY (`pa_id`) USING BTREE,
+  ADD KEY `alumno_id` (`alumno_id`),
+  ADD KEY `proceso_id` (`pg_id`),
+  ADD KEY `periodo_id` (`periodo_id`);
 
 --
 -- Indices de la tabla `profesor_grado`
@@ -588,13 +682,19 @@ ALTER TABLE `actividad`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `alumno_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `alumno_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `apoderado`
 --
 ALTER TABLE `apoderado`
-  MODIFY `apoderado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `apoderado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT de la tabla `apoderadosaunnoregistrados`
+--
+ALTER TABLE `apoderadosaunnoregistrados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `aulas`
@@ -606,19 +706,19 @@ ALTER TABLE `aulas`
 -- AUTO_INCREMENT de la tabla `contenidos`
 --
 ALTER TABLE `contenidos`
-  MODIFY `contenido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `contenido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `evaluaciones`
 --
 ALTER TABLE `evaluaciones`
-  MODIFY `evaluacion_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `evaluacion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ev_entregadas`
 --
 ALTER TABLE `ev_entregadas`
-  MODIFY `ev_entregada_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ev_entregada_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `grados`
@@ -636,7 +736,7 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
-  MODIFY `nota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `nota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `periodos`
@@ -648,13 +748,19 @@ ALTER TABLE `periodos`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `profesor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `profesor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `profesor_alumno`
+--
+ALTER TABLE `profesor_alumno`
+  MODIFY `pa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor_grado`
 --
 ALTER TABLE `profesor_grado`
-  MODIFY `pg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `pg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -688,9 +794,7 @@ ALTER TABLE `contenidos`
 -- Filtros para la tabla `evaluaciones`
 --
 ALTER TABLE `evaluaciones`
-  ADD CONSTRAINT `evaluaciones_ibfk_1` FOREIGN KEY (`contenido_id`) REFERENCES `contenidos` (`contenido_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `evaluaciones_ibfk_2` FOREIGN KEY (`materia_id`) REFERENCES `materias` (`materia_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `evaluaciones_ibfk_3` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`periodo_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `evaluaciones_ibfk_1` FOREIGN KEY (`contenido_id`) REFERENCES `contenidos` (`contenido_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `ev_entregadas`
@@ -703,10 +807,15 @@ ALTER TABLE `ev_entregadas`
 -- Filtros para la tabla `notas`
 --
 ALTER TABLE `notas`
-  ADD CONSTRAINT `notas_ibfk_1` FOREIGN KEY (`materia_id`) REFERENCES `materias` (`materia_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `notas_ibfk_2` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`alumno_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `notas_ibfk_3` FOREIGN KEY (`actividad_id`) REFERENCES `actividad` (`actividad_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `notas_ibfk_4` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`periodo_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `notas_ibfk_1` FOREIGN KEY (`ev_entregada_id`) REFERENCES `ev_entregadas` (`ev_entregada_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `profesor_alumno`
+--
+ALTER TABLE `profesor_alumno`
+  ADD CONSTRAINT `profesor_alumno_ibfk_1` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`alumno_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `profesor_alumno_ibfk_2` FOREIGN KEY (`pg_id`) REFERENCES `profesor_grado` (`pg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `profesor_alumno_ibfk_3` FOREIGN KEY (`periodo_id`) REFERENCES `periodos` (`periodo_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `profesor_grado`
