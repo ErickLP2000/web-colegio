@@ -7,5 +7,6 @@
     <!-- Page specific javascripts-->
     <script src="js/functions_contenidos.js"></script>
     <script src="js/functions_evaluaciones.js"></script>
+    <script src="js/functions_notas.js"></script>
   </body>
 </html>
