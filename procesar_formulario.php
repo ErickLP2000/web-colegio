@@ -15,26 +15,28 @@ if ($conn->connect_error) {
 
 // Obtener los datos del formulario
 $nombre_apoderado = $_POST['nombre_apoderado'];
-$apellido_apoderado = $_POST['apellido_apoderado'];
-$direccion_apoderado = $_POST['direccion_apoderado'];
-$telefono_apoderado = $_POST['telefono_apoderado'];
-$dni_apoderado = $_POST['dni_apoderado'];
-$correo_apoderado = $_POST['correo_apoderado']; // Nuevo campo
 $nombre_estudiante = $_POST['nombre_estudiante'];
-$apellido_estudiante = $_POST['apellido_estudiante'];
+$dni_apoderado = $_POST['dni_apoderado'];
+$dni_estudiante = $_POST['dni_estudiante'];
+$direccion_apoderado = $_POST['direccion_apoderado'];
+$edad_estudiante = $_POST['edad_estudiante'];
+$telefono_apoderado = $_POST['telefono_apoderado'];
+$nac_estudiante = $_POST['nac_estudiante'];
+$correo_apoderado = $_POST['correo_apoderado']; // Nuevo campo
 $grado_estudiante = $_POST['grado_estudiante'];
 
 // Preparar y enlazar
-$stmt = $conn->prepare("INSERT INTO ApoderadosAunNoRegistrados (nombre_apoderado, apellido_apoderado, direccion_apoderado, telefono_apoderado, dni_apoderado, correo_apoderado, nombre_estudiante, apellido_estudiante, grado_estudiante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("sssssssss", 
+$stmt = $conn->prepare("INSERT INTO matricula (nombre_apoderado, dni_apoderado, direccion_apoderado, telefono_apoderado, correo_apoderado, nombre_estudiante, dni_estudiante, edad_estudiante, nacimiento_estudiante, grado_estudiante) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssssss", 
     $nombre_apoderado, 
-    $apellido_apoderado, 
-    $direccion_apoderado, 
-    $telefono_apoderado, 
     $dni_apoderado, 
+    $direccion_apoderado, 
+    $telefono_apoderado,
     $correo_apoderado, // Nuevo campo
     $nombre_estudiante, 
-    $apellido_estudiante, 
+    $dni_estudiante, 
+    $edad_estudiante, 
+    $nac_estudiante, 
     $grado_estudiante
 );
 

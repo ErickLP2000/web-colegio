@@ -99,23 +99,41 @@ if (!isValid) {
   <!-- Navbar -->
   <nav class="navbar navbar-default navbar-fixed black no-background bootsnav">
     <div class="container">
-      <div class="navbar-header">
-        <!-- Logo colocado dentro de navbar-header para alinearlo más a la izquierda -->
+        <!-- Encabezado de la barra de navegación -->
+        <div class="navbar-header">
+            <!-- Logo (opcional) -->
+            <!--<a class="navbar-brand" href="#">
+                <img src="assets/images/insignia.png" alt="Logo" style="max-height: 40px;">
+            </a>-->
+            <!-- Botón de colapso para pantallas pequeñas -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
 
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-          <i class="fa fa-bars"></i>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="navbar-menu">
-        <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-          <li><a href="#contact">Contacto</a></li>
-          <li><a href="#hello">Inicio</a></li>
-          <li><a href="#about">Sobre nosotros</a></li>
-          <li><a href="#service">Servicios</a></li>
-        </ul>
-      </div>
+        <!-- Menú de navegación -->
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
+                <li><a href="#contact">Contacto</a></li>
+                <li><a href="#hello">Inicio</a></li>
+                <li><a href="#about">Sobre nosotros</a></li>
+                <li><a href="#service">Servicios</a></li>
+            </ul>
+
+            <!-- Opciones de logueo alineadas a la derecha -->
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown">Iniciar Sesión <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#login-alumno">Logueo Alumno</a></li>
+                        <li><a href="index.php">Logueo Personal</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
+
   <!-- Contacto -->
   <section id="contact" class="about roomy-100">
     <div class="container">
@@ -138,35 +156,18 @@ if (!isValid) {
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="nombre_apoderado">Ingresar nombre del apoderado</label>
+                    <label for="nombre_apoderado">Nombre completo del apoderado</label>
                     <input type="text" name="nombre_apoderado" id="nombre_apoderado" class="form-control"
                       placeholder="Nombre apoderado" required maxlength="50" onkeypress="allowOnlyLetters(event)"
                       title="Solo letras y espacios">
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="apellido_apoderado">Ingresar apellido del apoderado</label>
-                    <input type="text" name="apellido_apoderado" id="apellido_apoderado" class="form-control"
-                      placeholder="Apellido apoderado" required maxlength="50" onkeypress="allowOnlyLetters(event)"
+                <div class="form-group">
+                    <label for="nombre_estudiante">Nombre completo del estudiante</label>
+                    <input type="text" name="nombre_estudiante" id="nombre_estudiante" class="form-control"
+                      placeholder="Nombre del estudiante" required maxlength="50" onkeypress="allowOnlyLetters(event)"
                       title="Solo letras y espacios">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="direccion_apoderado">Ingresar dirección del apoderado</label>
-                    <input type="text" name="direccion_apoderado" id="direccion_apoderado" class="form-control"
-                      placeholder="Dirección" required maxlength="100">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="telefono_apoderado">Ingresar celular del apoderado</label>
-                    <input type="text" name="telefono_apoderado" id="telefono_apoderado" class="form-control"
-                      placeholder="Número de celular" required maxlength="9" onkeypress="allowOnlyNumbers(event)"
-                      title="Debe contener 9 dígitos">
                   </div>
                 </div>
               </div>
@@ -180,33 +181,53 @@ if (!isValid) {
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="nombre_estudiante">Ingresar nombre del estudiante</label>
-                    <input type="text" name="nombre_estudiante" id="nombre_estudiante" class="form-control"
-                      placeholder="Nombre del estudiante" required maxlength="50" onkeypress="allowOnlyLetters(event)"
-                      title="Solo letras y espacios">
+                    <label for="dni_estudiante">Ingresar DNI del estudiante</label>
+                    <input type="text" name="dni_estudiante" id="dni_estudiante" class="form-control" placeholder="DNI"
+                      required maxlength="8" onkeypress="allowOnlyNumbers(event)" title="Debe contener 8 dígitos">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="apellido_estudiante">Ingresar apellidos del estudiante</label>
-                    <input type="text" name="apellido_estudiante" id="apellido_estudiante" class="form-control"
-                      placeholder="Apellidos del estudiante" required maxlength="50"
-                      onkeypress="allowOnlyLetters(event)" title="Solo letras y espacios">
+                    <label for="direccion_apoderado">Ingresar dirección del apoderado</label>
+                    <input type="text" name="direccion_apoderado" id="direccion_apoderado" class="form-control"
+                      placeholder="Dirección" required maxlength="100">
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="edad_estudiante">Ingresar edad del estudiante</label>
+                    <input type="text" name="edad_estudiante" id="edad_estudiante" class="form-control" placeholder="Edad">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="telefono_apoderado">Ingresar celular del apoderado</label>
+                    <input type="text" name="telefono_apoderado" id="telefono_apoderado" class="form-control"
+                      placeholder="Número de celular" required maxlength="9" onkeypress="allowOnlyNumbers(event)"
+                      title="Debe contener 9 dígitos">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nac_estudiante">Año de nacimiento del estudiante</label>
+                    <input type="date" name="nac_estudiante" id="nac_estudiante" class="form-control"
+                      placeholder="Año de nacimiento">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="correo_apoderado">Ingresar correo del apoderado</label>
-                    <input type="text" name="correo_apoderado" id="correo_apoderado" class="form-control"
-                      >
+                    <input type="text" name="correo_apoderado" id="correo_apoderado" class="form-control" placeholder="Correo del apoderado">
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
+                <div class="col-md-6">
+                <div class="form-group">
                     <label for="grado_estudiante">Ingresar grado del estudiante</label>
                     <select name="grado_estudiante" id="grado_estudiante" class="form-control" required>
                       <option value="">Seleccione un grado</option>

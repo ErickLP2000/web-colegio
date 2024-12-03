@@ -11,83 +11,171 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+/* General styles */
 .main-header {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 100vh;
-}
-
-.main-cont {
-    background: #f2f2f2;
-    width: 100%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    align-items: center;
-}
-
-.desc-header {
-    width: 100%;
-    height: auto;
-    text-align: center;  
-}
-
-.desc-header img {
-    width: 90%;
-}
-
-.desc-header p {
-    font-size: 2em;
-    color: #336666;
-}
-
-.cont-header {
-    width: 100%;
-    height: auto;
-    text-align: center;
     display: flex;
+    position: relative;
+    background: linear-gradient(270deg, #005046, #007a65, #004033); /* Color de fondo compartido */
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
     justify-content: center;
+    padding: 10px;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.cont-header h1 {
-    color: #336666;
+.main-cont {
+    width: 100%;
+    height: 100%;
+    display: flex;
 }
 
-.cont-header form {
-    width: 350px;
-    height: auto;
-    border: 1px solid #336666;
-    padding: 1em;
-    margin: 2em;
-    border-radius: 1em;
+/* Sección de imagen (para ambas vistas) */
+.half-section {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform 0.5s ease-in-out; /* Sin opacity aquí */
+    flex-direction: column;
+    text-align: center;
+    overflow: hidden; /* Evita que el contenido se salga de la caja */
 }
 
-.cont-header form label {
+
+
+/* Imagen de Profesor */
+.profesor-image {
+    display: block; /* Mostrar la imagen del Profesor por defecto */
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    transition: opacity 0.5s ease-in-out; /* Transición de opacidad */ 
+}
+
+/* Imagen de Administrador */
+.admin-image {
+    display: none; /* Ocultar la imagen de Administrador por defecto */
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    transition: opacity 0.5s ease-in-out; /* Transición de opacidad */ 
+}
+
+
+
+/* Form section */
+.form-section {
+    background: #ffffff;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    color: #005046;
+    margin-bottom: 20px;
+}
+
+/* Vista oculta */
+.view {
+    display: none;
+}
+
+.active-view {
     display: block;
-    padding: 10px;
+}
+
+.form {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
 }
 
 input {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #005046;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button.btn:hover {
+    background: #007a65;
+}
+
+/* Estilo para enlaces */
+.return-link {
+    display: block;
+    margin-top: 15px;
+    color: #005046;
+    text-decoration: none;
+    font-size: 14px;
     text-align: center;
 }
 
-#loginUsuario, #loginProfesor {
-    display: block;
-    width: 100%;
-    margin-top: 15px;
-    padding: .7em;
+.return-link:hover {
+    text-decoration: underline;
+}
+
+
+/* Botón para cambiar la vista */
+.switch-btn {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    background: #005046;
+    color: #ffffff;
     border: none;
-    border-radius: 8px;
-    background: #153744;
-    color: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.switch-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Animación de fondo de gradiente */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .alert {
@@ -100,4 +188,17 @@ input[type="password"] {
 /* Espacio arriba del mensaje de error */
 .alert {
     margin-top: 10px;
+}
+
+.institucion-text {
+    font-size: 2rem; /* Tamaño de fuente más grande */
+    color: #ffffff; /* Texto blanco */
+    font-family: 'Arial', sans-serif; /* Familia de fuente limpia */
+    font-weight: bold; /* Texto en negrita */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para un efecto bonito */
+    margin-top: 20px; /* Espaciado superior */
+    margin-bottom: 20px; /* Espaciado inferior */
+    text-align: center; /* Centrado del texto */
+    padding: 10px; /* Espaciado interior */
+    border-radius: 10px; /* Bordes redondeados */
 }
