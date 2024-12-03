@@ -18,51 +18,46 @@
     <title>Ingreso al Sistema</title>
 </head>
 <body>
-    <header class="main-header">
-        <div class="main-cont">
-            <div class="desc-header">
-                <img src="images/school-svg.svg" alt="image school">    
-                <p>Institución Educativa 5010 Virgen de Guadalupe</p>
+<header class="main-header">
+    <div class="main-cont">
+        <!-- Contenedor dividido en dos partes -->
+        <div class="half-section image-section" id="imageSection">
+            <!-- Imagen para Profesor -->
+            <img src="images/profe.webp" alt="Imagen Profesor" class="profesor-image">
+            <!-- Imagen para Administrador -->
+            <img src="images/admin.webp" alt="Imagen Administrador" class="admin-image">
+            <p class="institucion-text">Institución Educativa 5010 Virgen de Guadalupe</p>
+        </div>
+        <div class="half-section form-section" id="formSection">
+            <div id="profesorView" class="view active-view">
+                <h1>Bienvenid@ Profesor</h1>
+                <form class="form" action="" onsubmit="return validar('usuarioProfesor', 'passProfesor', 'messageProfesor')">
+                    <label for="usuarioProfesor">Usuario</label>
+                    <input type="text" name="usuarioProfesor" id="usuarioProfesor" placeholder="Nombre de usuario" required>
+                    <label for="passwordProfesor">Contraseña</label>
+                    <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña" required>
+                    <div id="messageProfesor" class="form-message"></div>
+                    <button id="loginProfesor" type="submit" class="btn btn-primary">INICIAR SESIÓN</button>
+                    <a href="indexprincipal.php" class="return-link">← Regresar a la página principal</a>
+                </form>
             </div>
-        </div>   
-        <div class="cont-header">
-            <h1>Bienvenid@</h1>
-            <div class="form">
-                <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Adminstrador</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profesor</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <form action="" onsubmit="return validar()">
-                            <label for="usuario">Usuario</label>
-                            <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario">
-                            <label for="password">Contraseña</label>
-                            <input type="password" name="pass" id="pass" placeholder="Contraseña">
-                            <div id="messageUsuario"></div>
-                            <button id="loginUsuario" type="button">INICIAR SESION</button>
-                        </form>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <form action="" onsubmit="return validar()">
-                            <label for="usuario">Usuario</label>
-                            <input type="text" name="usuarioProfesor" id="usuarioProfesor" placeholder="Nombre de usuario">
-                            <label for="password">Contraseña</label>
-                            <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña">
-                            <div id="messageProfesor"></div>
-                            <button id="loginProfesor" type="button">INICIAR SESION</button>
-                        </form>
-                    </div>
-                </div>
+            <div id="adminView" class="view">
+                <h1>Bienvenid@ Administrador</h1>
+                <form class="form" action="" onsubmit="return validar('usuario', 'pass', 'messageUsuario')">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" required>
+                    <label for="password">Contraseña</label>
+                    <input type="password" name="pass" id="pass" placeholder="Contraseña" required>
+                    <div id="messageUsuario" class="form-message"></div>
+                    <button id="loginUsuario" type="submit" class="btn btn-primary">INICIAR SESIÓN</button>
+                    <a href="indexprincipal.php" class="return-link">← Regresar a la página principal</a>
+                </form>
             </div>
         </div>
-       
         
-    </header>
+    </div>
+    <button class="switch-btn" id="switchView">⇄</button>
+</header>
 
        
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.12/dist/sweetalert2.min.js"></script>
