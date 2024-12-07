@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-12-2024 a las 17:41:23
+-- Tiempo de generación: 07-12-2024 a las 18:07:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -90,7 +90,7 @@ CREATE TABLE `apoderado` (
   `documento` varchar(20) NOT NULL,
   `clave` varchar(255) NOT NULL,
   `telefono` bigint(20) NOT NULL,
-  `correo` varchar(100) NOT NULL,
+  `correo` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -612,7 +612,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`usuario_id`, `nombre`, `usuario`, `clave`, `rol`, `estado`) VALUES
 (1, 'Admin', 'admin', '$2y$10$l1am85ajTECt9z8Ooe0NZ.tXQzgclpjLBMKlHAkPHdm3Y4ZmrcDpe', 1, 1),
 (2, 'Jesus Mirelese', 'jesus1', '$2y$10$V.pRVxMWFJv6ZhMzUNLE3OvdzW3P1QwALYAljBXi4LlX/n2NtUGMK', 2, 1),
-(3, 'Andres', 'andres1', '$2y$10$lW5PaQB4lrIXNKKg16xAKO0GOkC123mC7Spz4/lQjJQEnB8wAHmK2', 1, 1),
+(3, 'Andres', 'andres1', '$2y$10$JTunVSyNQUDrnJ8ZfYE/Lem1MOofvSoJQWdRVGSErIvH29rBfX97K', 1, 1),
 (4, 'Luis Nogueraa', 'RORO', '$2y$10$35BYYyjCNBCQoN8CmvIeA.jm4qH.cwmdlJGzE1glWsBRlGAa/vHxC', 1, 1),
 (5, 'Andres', 'FAS', '$2y$10$M2UNLMiGaach0MrpFmCLaO/GCIUxHW7CWH9CR.IOFXPs6Kidwp7QS', 1, 1),
 (6, 'More', 'MORE', '$2y$10$qgbGwXKiZeYtIVg1nx1tIeKSxo7nthfbAHdNgNDEQ0usmv5msTCqq', 1, 1),
