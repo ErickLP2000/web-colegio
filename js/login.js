@@ -1,83 +1,104 @@
-// Lógica de alternancia de vistas
-document.getElementById('switchView').addEventListener('click', () => {
-    const adminView = document.getElementById('adminView');
-    const profesorView = document.getElementById('profesorView');
-    const imageSection = document.getElementById('imageSection');
-    const formSection = document.getElementById('formSection');
-    const profesorImage = document.querySelector('.profesor-image');
-    const adminImage = document.querySelector('.admin-image');
+$(document).ready(function() {
+    // Maneja el envío del formulario del profesor
+    $('#profesorForm').on('submit', function(event) {
+        event.preventDefault(); // Prevenir el comportamiento predeterminado
+        if (validarCampos('usuarioProfesor', 'passProfesor', 'messageProfesor')) {
+            loginProfesor();
+        }
+    });
 
-    // Alternar las vistas
-    if (profesorView.classList.contains('active-view')) {
-        profesorView.classList.remove('active-view');
-        adminView.classList.add('active-view');
-        
-        // Cambiar posiciones
-        imageSection.style.transform = 'translateX(+100%)';
-        formSection.style.transform = 'translateX(-100%)';
-        
-        // Mostrar imagen de Administrador y ocultar imagen de Profesor
-        adminImage.style.display = 'block';
-        profesorImage.style.display = 'none';
-    } else {
-        adminView.classList.remove('active-view');
-        profesorView.classList.add('active-view');
+    // Maneja el envío del formulario del administrador
+    $('#adminForm').on('submit', function(event) {
+        event.preventDefault();
+        if (validarCampos('usuario', 'pass', 'messageUsuario')) {
+            loginUsuario();
+        }
+    });
 
-        // Restaurar posiciones
-        imageSection.style.transform = 'translateX(0)';
-        formSection.style.transform = 'translateX(0)';
-        
-        // Mostrar imagen de Profesor y ocultar imagen de Administrador
-        profesorImage.style.display = 'block';
-        adminImage.style.display = 'none';
-    }
+    // Maneja el envío del formulario del apoderado
+    $('#apoderadoForm').on('submit', function (event) {
+        event.preventDefault(); // Previene el comportamiento predeterminado
+        if (validarCampos('usuarioApoderado', 'passApoderado', 'messageApoderado')) {
+            loginApoderado(); // Llama a la función específica para apoderados
+        }
+    });
 });
 
+function validarCampos(inputUsuarioId, inputPasswordId, messageId) {
+    const usuario = $(`#${inputUsuarioId}`).val().trim();
+    const password = $(`#${inputPasswordId}`).val().trim();
 
-$(document).ready(function(){
-    $('#loginUsuario').on('click',function(){
-        loginUsuario();
-    });
-    $('#loginProfesor').on('click',function(){
-        loginProfesor();
-    });
-})
+    if (usuario === '' || password === '') {
+        $(`#${messageId}`).html("Por favor, completa todos los campos.").addClass("text-danger");
+        return false; // Detener el envío
+    }
 
-function loginUsuario(){
-    var login = $('#usuario').val();
-    var pass = $('#pass').val();
-
-    $.ajax({
-        url: './includes/loginUsuario.php',
-        method: 'POST',
-        data: {
-            login:login,
-            pass:pass
-        },
-        success: function(data) {
-            $('#messageUsuario').html(data);
-            if(data.indexOf('Redirecting') >= 0){
-                window.location = 'administrador/';
-            }
-        }
-    })
+    $(`#${messageId}`).html(""); // Limpiar mensajes previos
+    return true; // Permitir el envío
 }
-function loginProfesor(){
-    var loginProfesor = $('#usuarioProfesor').val();
-    var passProfesor = $('#passProfesor').val();
+
+function loginProfesor() {
+    if (!validarCampos('usuarioProfesor', 'passProfesor', 'messageProfesor')) return;
+
+    const loginProfesor = $('#usuarioProfesor').val();
+    const passProfesor = $('#passProfesor').val();
 
     $.ajax({
         url: './includes/loginProfesor.php',
         method: 'POST',
-        data: {
-            loginProfesor:loginProfesor,
-            passProfesor:passProfesor
-        },
+        data: { loginProfesor, passProfesor },
         success: function(data) {
             $('#messageProfesor').html(data);
-            if(data.indexOf('Redirecting') >= 0){
+            if (data.indexOf('Redirecting') >= 0) {
                 window.location = 'profesor/';
             }
+        },
+        error: function() {
+            $('#messageProfesor').html("Error al conectar con el servidor.");
         }
-    })
+    });
+}
+
+function loginUsuario() {
+    if (!validarCampos('usuario', 'pass', 'messageUsuario')) return;
+
+    const login = $('#usuario').val();
+    const pass = $('#pass').val();
+
+    $.ajax({
+        url: './includes/loginUsuario.php',
+        method: 'POST',
+        data: { login, pass },
+        success: function(data) {
+            $('#messageUsuario').html(data);
+            if (data.indexOf('Redirecting') >= 0) {
+                window.location = 'administrador/';
+            }
+        },
+        error: function() {
+            $('#messageUsuario').html("Error al conectar con el servidor.");
+        }
+    });
+}
+
+function loginApoderado() {
+    if (!validarCampos('usuarioApoderado', 'passApoderado', 'messageApoderado')) return;
+
+    const loginApoderado = $('#usuarioApoderado').val().trim();
+    const passApoderado = $('#passApoderado').val().trim();
+
+    $.ajax({
+        url: './includes/loginApoderado.php', // Archivo PHP específico para apoderados
+        method: 'POST',
+        data: { loginApoderado, passApoderado },
+        success: function (data) {
+            $('#messageApoderado').html(data);
+            if (data.indexOf('Redirigiendo') >= 0) {
+                window.location = 'apoderado/';
+            }
+        },
+        error: function () {
+            $('#messageApoderado').html("Error al conectar con el servidor.").addClass("text-danger");
+        }
+    });
 }

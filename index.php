@@ -29,25 +29,27 @@
             <p class="institucion-text">Institución Educativa 5010 Virgen de Guadalupe</p>
         </div>
         <div class="half-section form-section" id="formSection">
+            <!-- Vista para profesores -->
             <div id="profesorView" class="view active-view">
                 <h1>Bienvenid@ Profesor</h1>
-                <form class="form" action="" onsubmit="return validar('usuarioProfesor', 'passProfesor', 'messageProfesor')">
-                    <label for="usuarioProfesor">Usuario</label>
-                    <input type="text" name="usuarioProfesor" id="usuarioProfesor" placeholder="Nombre de usuario" required>
-                    <label for="passwordProfesor">Contraseña</label>
-                    <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña" required>
+                <form id="profesorForm" class="form">
+                    <label for="usuarioProfesor">Ingresar Usuario</label>
+                    <input type="text" name="usuarioProfesor" id="usuarioProfesor" placeholder="Nombre de usuario">
+                    <label for="passwordProfesor">Ingresar Contraseña</label>
+                    <input type="password" name="passProfesor" id="passProfesor" placeholder="Contraseña">
                     <div id="messageProfesor" class="form-message"></div>
                     <button id="loginProfesor" type="submit" class="btn btn-primary">INICIAR SESIÓN</button>
                     <a href="indexprincipal.php" class="return-link">← Regresar a la página principal</a>
                 </form>
             </div>
+            <!-- Vista para administrador -->
             <div id="adminView" class="view">
                 <h1>Bienvenid@ Administrador</h1>
-                <form class="form" action="" onsubmit="return validar('usuario', 'pass', 'messageUsuario')">
-                    <label for="usuario">Usuario</label>
-                    <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" required>
-                    <label for="password">Contraseña</label>
-                    <input type="password" name="pass" id="pass" placeholder="Contraseña" required>
+                <form id="adminForm" class="form">
+                    <label for="usuario">Ingresar Usuario</label>
+                    <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario">
+                    <label for="password">Ingresar Contraseña</label>
+                    <input type="password" name="pass" id="pass" placeholder="Contraseña">
                     <div id="messageUsuario" class="form-message"></div>
                     <button id="loginUsuario" type="submit" class="btn btn-primary">INICIAR SESIÓN</button>
                     <a href="indexprincipal.php" class="return-link">← Regresar a la página principal</a>
@@ -65,5 +67,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/login.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/estilologin.js"></script>
 </body>
 </html>

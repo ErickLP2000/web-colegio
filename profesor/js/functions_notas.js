@@ -17,6 +17,17 @@ document.addEventListener('DOMContentLoaded',function(){
                 return false;
             }
 
+            // Validación del rango de la nota (0 a 20)
+            if (nota < 0 || nota > 20) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Atención",
+                    text: "La nota debe estar entre 0 y 20",
+                    confirmButtonColor: "#00695C",
+                });
+                return false;
+            }
+
             var request =(window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
             var url = 'models/notas/ajax-notas.php';
             var form = new FormData(formNota);

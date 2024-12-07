@@ -1,0 +1,245 @@
+.app-sidebar__user-name {
+    white-space: normal; /* Permite saltos de línea */
+}
+
+
+  
+.app-header {
+background-color: #30908e;
+}
+  
+@media (min-width: 768px) {
+    .app-header__logo{
+      background-color: #066b74;
+    }
+}
+  
+a{
+    color: #35cbdc;
+}
+  
+.app-sidebar__toggle:focus, .app-sidebar__toggle:hover{
+    background-color: #067470;
+}
+  
+.app-sidebar{
+    background-color: #002425;
+}
+
+.app-menu__item.active,
+.app-menu__item:focus,
+.app-menu__item:hover {
+    background: #0d1314;
+    border-left-color: #35c0dc;
+    text-decoration: none;
+    color: #fff
+}
+  
+.treeview.is-expanded [data-toggle=treeview] {
+    border-left-color: #35c0dc;
+    background: #0d1314;
+}
+  
+.treeview-menu {
+    background: #2a3b3e
+}
+
+.treeview-item.active,
+.treeview-item:focus,
+.treeview-item:hover {
+  background: #417f82;
+  text-decoration: none;
+  color: #fff
+}
+
+.card {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  text-align: left; /* Alinea todo el contenido al lado izquierdo */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  text-align: center; /* Asegura que el título también esté alineado a la izquierda */
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+}
+
+.card-text strong {
+  font-weight: bold;
+}
+
+#evaluacionesContenedor {
+  max-height: 400px; /* Define la altura máxima del contenedor */
+  overflow-y: auto; /* Activa la barra de desplazamiento vertical */
+  padding: 15px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+
+.form-container {
+    max-width: 600px;
+    margin: 10px auto; /* Reduce espacio vertical */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.reporte-previo {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Menor espacio entre reportes */
+  position: relative;
+  word-wrap: break-word; /* Evita desbordamiento en palabras largas */
+}
+
+.reporte-previo h5 {
+    margin: 0;
+}
+
+.reporte-previo p {
+    margin: 5px 0;
+}
+
+.reporte-previo small {
+    color: #6c757d;
+}
+
+.reporte-previo .btn {
+  position: absolute;
+  bottom: 10px; /* Pone el botón 10px desde la parte inferior */
+  right: 10px; /* Pone el botón 10px desde la parte derecha */
+}
+
+.tile {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+   
+    
+.tile-body {
+    max-height: calc(100vh - 200px); /* Altura dinámica */
+    overflow-y: auto; /* Desplazamiento vertical si es necesario */
+    padding: 15px; /* Espaciado interno reducido */
+}
+
+
+
+
+label {
+  font-family: 'Arial', sans-serif;
+  color: #495057;
+}
+
+select {
+  font-size: 1rem;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para la tarjeta de información */
+#infoAlumno {
+  transition: all 0.3s ease-in-out;
+}
+
+#infoAlumno:hover {
+  background-color: #f1f1f1;
+}
+
+/* Título */
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Formulario */
+.form-group {
+  margin-bottom: 1.5rem; /* Espaciado entre grupos de formulario */
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #495057;
+  margin-bottom: 0.5rem; /* Espaciado entre label y el elemento */
+  display: block; /* Asegura que el label esté en una línea separada */
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+/* Información de asistencia */
+.asistencia-info {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+/* Texto de información inicial */
+.asistencia-info p {
+  margin: 0;
+}
+
+/* Estilo personalizado para el botón Enviar Reporte */
+.btn-enviar-reporte {
+  background-color: #067470; /* Color de fondo azul */
+  color: white; /* Texto blanco */
+  border: none; /* Sin borde */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 10px 20px; /* Espaciado interior */
+  font-size: 1rem; /* Tamaño de la fuente */
+  font-weight: 600; /* Peso de la fuente */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  cursor: pointer; /* Cambiar el cursor cuando se pasa por encima */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+}
+
+/* Efecto al pasar el cursor por encima */
+.btn-enviar-reporte:hover {
+  background-color: #0086b3; /* Fondo más oscuro al pasar el cursor */
+  transform: translateY(-3px); /* Mover ligeramente el botón hacia arriba */
+}
+
+/* Efecto al hacer clic en el botón */
+.btn-enviar-reporte:active {
+  background-color: #005d85; /* Fondo aún más oscuro cuando se hace clic */
+  transform: translateY(0); /* Vuelve a la posición original */
+}
+
+/* Estilo para el enfoque en el botón (cuando se da click o se navega con tab) */
+.btn-enviar-reporte:focus {
+  outline: none; /* Quita el borde de enfoque predeterminado */
+  box-shadow: 0 0 5px rgba(0, 157, 255, 0.5); /* Sombra azul cuando se enfoca */
+}
