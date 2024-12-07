@@ -2,3 +2,51 @@
   width: 200px;
   /* Ancho reducido */
 }
+
+.app-header {
+  background-color: #903030;
+}
+
+@media (min-width: 768px) {
+  .app-header__logo{
+    background-color: #740606;
+  }
+}
+
+a{
+  color: #dc3545;
+}
+
+.app-sidebar__toggle:focus, .app-sidebar__toggle:hover{
+  background-color: #740606;
+}
+
+.app-sidebar{
+  background-color: #250000;
+}
+
+.app-menu__item.active,
+.app-menu__item:focus,
+.app-menu__item:hover {
+  background: #140d0d;
+  border-left-color: #dc3545;
+  text-decoration: none;
+  color: #fff
+}
+
+.treeview.is-expanded [data-toggle=treeview] {
+  border-left-color: #dc3545;
+  background: #140d0d;
+}
+
+.treeview-menu {
+  background: #3e2a2a
+}
+
+.treeview-item.active,
+.treeview-item:focus,
+.treeview-item:hover {
+  background: #824141;
+  text-decoration: none;
+  color: #fff
+}

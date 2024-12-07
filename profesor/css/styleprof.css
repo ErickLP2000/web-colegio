@@ -1,3 +1,53 @@
 .app-sidebar__user-name {
-    white-space: normal !important; /* Permite saltos de línea */
+    white-space: normal; /* Permite saltos de línea */
+}
+
+
+  
+.app-header {
+background-color: #389030;
+}
+  
+@media (min-width: 768px) {
+    .app-header__logo{
+      background-color: #207406;
+    }
+}
+  
+a{
+    color: #49dc35;
+}
+  
+.app-sidebar__toggle:focus, .app-sidebar__toggle:hover{
+    background-color: #137406;
+}
+  
+.app-sidebar{
+    background-color: #022500;
+}
+
+.app-menu__item.active,
+.app-menu__item:focus,
+.app-menu__item:hover {
+    background: #0f140d;
+    border-left-color: #54dc35;
+    text-decoration: none;
+    color: #fff
+}
+  
+.treeview.is-expanded [data-toggle=treeview] {
+    border-left-color: #59dc35;
+    background: #0f140d;
+}
+  
+.treeview-menu {
+    background: #2b3e2a
+}
+
+.treeview-item.active,
+.treeview-item:focus,
+.treeview-item:hover {
+  background: #538241;
+  text-decoration: none;
+  color: #fff
 }

@@ -24,6 +24,7 @@ $rown = $query ->rowCount();
       </div>
       <ul class="app-menu">
         <li><a class="app-menu__item" href="index.php"><i class="app-menu__icon fa-solid fa-house"></i><span class="app-menu__label">Inicio</span></a></li>
+        <li><a class="app-menu__item" href="Asistencias.php"><i class="app-menu__icon fa-solid fa-calendar-days"></i><span class="app-menu__label">Asistencias</span></a></li>
         <li class="treeview">
           <a class="app-menu__item" href="#" data-toggle="treeview">
           <i class="app-menu__icon fa-solid fa-laptop"></i>

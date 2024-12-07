@@ -10,7 +10,7 @@
             <input type="hidden" name="ideventregada" id="ideventregada" value="<?= $ev_entregada; ?>">
             <div class="mb-3">
                 <label for="control-label">Nota:</label>
-                <input type="number" class="form-control" name="nota" id="nota">
+                <input type="number" class="form-control" name="nota" id="nota" min="0" max="20">
             </div>
             <div class="mb-3">
                 <label for="control-label">Nota.</label>

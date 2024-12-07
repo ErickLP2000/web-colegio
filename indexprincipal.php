@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Pagina principal</title>
+  <title>Página principal</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="assets/images/insignia.png">
@@ -23,75 +23,98 @@
   <link rel="stylesheet" href="assets/css/bootsnav.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <style>
-  .success-message {
-    display: none;
-    /* Oculto por defecto */
-    padding: 20px;
-    background-color: #4CAF50;
-    /* Color verde */
-    color: white;
-    margin-bottom: 15px;
-    text-align: center;
-    border-radius: 4px;
-  }
-
-  .success-message.show {
-    display: block;
-    /* Mostrar cuando se agrega la clase 'show' */
-  }
-
-  /* Navbar ajustes */
-  .navbar-header .navbar-brand img {
-    width: 50px;
-    /* Tamaño del logo */
-  }
-  </style>
+  <style> /* Estilos generales del formulario */ .form-container { max-width: 600px; margin: 0 auto; } .form-group { margin-bottom: 15px; } .form-control { width: 100%; padding: 10px; box-sizing: border-box; } .form-control-small { width: auto; display: inline-block; } .btn-primary { background-color: #007bff; border: none; color: white; padding: 10px 20px; cursor: pointer; } .btn-primary:hover { background-color: #0056b3; } .success-message { display: none; color: green; font-weight: bold; margin-top: 20px; } </style>
 
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-
+  <style> .success-message { display: none; color: green; background-color: #d4edda; padding: 10px; border: 1px solid #c3e6cb; border-radius: 5px; margin-top: 20px; } .success-message.show { display: block; } </style>
   <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
-  <script>
-  // Función para permitir sólo números en los campos de entrada
-  function allowOnlyNumbers(event) {
-    var charCode = event.which ? event.which : event.keyCode;
-    // Sólo admite números (0-9)
-    if (charCode < 48 || charCode > 57) {
-      event.preventDefault();
-    }
-  }
+  
 
-  // Función para permitir sólo letras con acentos, virgulilla y diacríticos
-  function allowOnlyLetters(event) {
-    var charCode = event.which ? event.which : event.keyCode;
-    // Permitir letras (a-z, A-Z) con acento español y caracteres especiales
-    var pattern = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
-    var char = String.fromCharCode(charCode);
-    if (!pattern.test(char)) {
-      event.preventDefault();
-    }
-  }
+    
+     <!-- JavaScript Functions -->
+     <script>
+        // Función para permitir sólo números en los campos de entrada
+        function allowOnlyNumbers(event) {
+            var charCode = event.which ? event.which : event.keyCode;
+            if (charCode < 48 || charCode > 57) {
+                event.preventDefault();
+            }
+        }
+        
+        // Función para permitir sólo letras con acentos, virgulilla y diacríticos
+        function allowOnlyLetters(event) {
+            var charCode = event.which ? event.which : event.keyCode;
+            var pattern = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+            var char = String.fromCharCode(charCode);
+            if (!pattern.test(char)) {
+                event.preventDefault();
+            }
+        }
 
-  // Función para validar el correo electrónico
- // Validar Correo Electrónico 
-// Validar Correo Electrónico 
-// Validar Correo Electrónico 
-var correoInput = document.getElementById('correo_apoderado');
-var regexCorreo = /^[a-zA-ZñÑ0-9._%+-]+@[a-zA-ZñÑ0-9.-]+\.[a-zA-ZñÑ]{2,}$/;
+        // Validación adicional de formulario
+        function validateForm(event) {
+            var isValid = true;
+            var correoInput = document.getElementById('correo_apoderado');
+            var regexCorreo = /^[a-zA-ZñÑ0-9._%+-]+@[a-zA-ZñÑ0-9.-]+\.[a-zA-ZñÑ]{2,}$/;
+            if (!regexCorreo.test(correoInput.value)) {
+                isValid = false;
+                correoInput.setCustomValidity("Correo electrónico no es válido");
+                correoInput.reportValidity();
+            } else {
+                correoInput.setCustomValidity("");
+            }
 
-if (!regexCorreo.test(correoInput.value)) {
-  isValid = false;
-  alert("Correo electrónico no es válido");
-}
+            var dniInput = document.getElementById('dni_apoderado');
+            if (!/^\d{8}$/.test(dniInput.value)) {
+                isValid = false;
+                dniInput.setCustomValidity("DNI debe contener 8 dígitos");
+                dniInput.reportValidity();
+            } else {
+                dniInput.setCustomValidity("");
+            }
 
-if (!isValid) {
-  event.preventDefault();
-}
+            var telefonoInput = document.getElementById('telefono_apoderado');
+            if (!/^\d{9}$/.test(telefonoInput.value)) {
+                isValid = false;
+                telefonoInput.setCustomValidity("Teléfono debe contener 9 dígitos");
+                telefonoInput.reportValidity();
+            } else {
+                telefonoInput.setCustomValidity("");
+            }
 
+            var textoInputs = document.querySelectorAll(
+                'input[type="text"]:not(#telefono_apoderado):not(#dni_apoderado):not(#direccion_apoderado):not(#correo_apoderado):not(#correo_estudiante):not(#dni_estudiante)'
+            );
+            textoInputs.forEach(function(input) {
+                var regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+                if (!regex.test(input.value)) {
+                    isValid = false;
+                    input.setCustomValidity(input.getAttribute('placeholder') + " debe contener solo letras y espacios");
+                    input.reportValidity();
+                } else {
+                    input.setCustomValidity("");
+                }
+            });
 
-  </script>
+            if (!isValid) {
+                event.preventDefault();
+            }
+        }
+
+        // Mostrar el mensaje de éxito si existe el parámetro en la URL
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('registro') === 'exitoso') {
+                document.getElementById('successMessage').classList.add('show');
+                // Eliminar el parámetro 'registro' de la URL
+                const url = new URL(window.location);
+                url.searchParams.delete('registro');
+                window.history.replaceState({}, document.title, url);
+            }
+        };
+    </script>
 
 </head>
 
@@ -125,166 +148,145 @@ if (!isValid) {
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown">Iniciar Sesión <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#login-alumno">Logueo Alumno</a></li>
+                        <li><a href="indexestudianteapoderado.php">Logueo Alumno</a></li>
                         <li><a href="index.php">Logueo Personal</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
-</nav>
-
-  <!-- Contacto -->
+  </nav>
   <section id="contact" class="about roomy-100">
-    <div class="container">
-      <div class="row">
-        <div class="main_about">
-          <div class="col-md-6">
-            <div class="about_content">
-              <h2>Ratificación Admisión</h2>
-              <h1>2025</h1>
-              <div class="separator_left"></div>
-              <p>¡Bienvenidos a nuestra plataforma de matrícula en línea!
-                Regístrate ahora y recibe toda la información necesaria para inscribir a tu hijo/a en nuestro
-                prestigioso colegio. Una vez completado el formulario, nuestro equipo se pondrá en contacto contigo en
-                pocas horas para confirmar la matrícula y enviarte las instrucciones de pago a tu correo electrónico.
-                ¡No pierdas esta oportunidad de asegurar un futuro brillante para tu hijo/a con nosotros!</p>
+        <div class="container">
+            <div class="row">
+                <div class="main_about">
+                    <div class="col-md-6">
+                        <div class="about_content">
+                            <h2>Ratificación Admisión</h2>
+                            <h1>2025</h1>
+                            <div class="separator_left"></div>
+                            <p>¡Bienvenidos a nuestra plataforma de matrícula en línea! Regístrate ahora y recibe toda la información necesaria para inscribir a tu hijo/a en nuestro prestigioso colegio. Una vez completado el formulario, nuestro equipo se pondrá en contacto contigo en pocas horas para confirmar la matrícula y enviarte las instrucciones de pago a tu correo electrónico. ¡No pierdas esta oportunidad de asegurar un futuro brillante para tu hijo/a con nosotros!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <form id="matricula-form" action="procesar_formulario.php" method="post" onsubmit="validateForm(event)">
+                            <div class="form-container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nombreapellido_apoderado">Nombre y apellido del apoderado</label>
+                                            <input type="text" name="nombreapellido_apoderado" id="nombreapellido_apoderado" class="form-control"
+                                                placeholder="Nombre y apellido apoderado" required maxlength="100" onkeypress="allowOnlyLetters(event)"
+                                                title="Solo letras y espacios">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dni_apoderado">DNI del apoderado</label>
+                                            <input type="text" name="dni_apoderado" id="dni_apoderado" class="form-control" placeholder="DNI"
+                                                required maxlength="8" onkeypress="allowOnlyNumbers(event)" title="Debe contener 8 dígitos">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="direccion_apoderado">Dirección del apoderado</label>
+                                            <input type="text" name="direccion_apoderado" id="direccion_apoderado" class="form-control"
+                                                placeholder="Dirección" required maxlength="100">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="telefono_apoderado">Celular del apoderado</label>
+                                            <input type="text" name="telefono_apoderado" id="telefono_apoderado" class="form-control"
+                                                placeholder="Número de celular" required maxlength="9" onkeypress="allowOnlyNumbers(event)"
+                                                title="Debe contener 9 dígitos">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="correo_apoderado">Correo del apoderado</label>
+                                    <input type="text" name="correo_apoderado" id="correo_apoderado" class="form-control" placeholder="Correo" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="nombreapellido_estudiante">Nombre y apellido del estudiante</label>
+                                            <input type="text" name="nombreapellido_estudiante" id="nombreapellido_estudiante" class="form-control"
+                                                placeholder="Nombre y apellido del estudiante" required maxlength="100" onkeypress="allowOnlyLetters(event)"
+                                                title="Solo letras y espacios">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="dni_estudiante">DNI del estudiante</label>
+                                            <input type="text" name="dni_estudiante" id="dni_estudiante" class="form-control" placeholder="DNI"
+                                                required maxlength="8" onkeypress="allowOnlyNumbers(event)" title="Debe contener 8 dígitos">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="fecha_nacimiento">Fecha de nacimiento del estudiante</label>
+                                      <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" placeholder="Fecha de nacimiento" required title="Seleccione una fecha válida">
+                                  </div>
+                                </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="grado_estudiante">Grado del estudiante</label>
+                                            <select name="grado_estudiante" id="grado_estudiante" class="form-control" required>
+                                                <option value="">Seleccione un grado</option>
+                                                <option value="1ero de primaria">1ero de primaria</option>
+                                                <option value="2do de primaria">2do de primaria</option>
+                                                <option value="3ro de primaria">3ro de primaria</option>
+                                                <option value="4to de primaria">4to de primaria</option>
+                                                <option value="5to de primaria">5to de primaria</option>
+                                                <option value="6to de primaria">6to de primaria</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="success-message" id="successMessage">Registro exitoso</div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <form id="matricula-form" action="procesar_formulario.php" method="post">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="nombre_apoderado">Nombre completo del apoderado</label>
-                    <input type="text" name="nombre_apoderado" id="nombre_apoderado" class="form-control"
-                      placeholder="Nombre apoderado" required maxlength="50" onkeypress="allowOnlyLetters(event)"
-                      title="Solo letras y espacios">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="nombre_estudiante">Nombre completo del estudiante</label>
-                    <input type="text" name="nombre_estudiante" id="nombre_estudiante" class="form-control"
-                      placeholder="Nombre del estudiante" required maxlength="50" onkeypress="allowOnlyLetters(event)"
-                      title="Solo letras y espacios">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="dni_apoderado">Ingresar DNI del apoderado</label>
-                    <input type="text" name="dni_apoderado" id="dni_apoderado" class="form-control" placeholder="DNI"
-                      required maxlength="8" onkeypress="allowOnlyNumbers(event)" title="Debe contener 8 dígitos">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="dni_estudiante">Ingresar DNI del estudiante</label>
-                    <input type="text" name="dni_estudiante" id="dni_estudiante" class="form-control" placeholder="DNI"
-                      required maxlength="8" onkeypress="allowOnlyNumbers(event)" title="Debe contener 8 dígitos">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="direccion_apoderado">Ingresar dirección del apoderado</label>
-                    <input type="text" name="direccion_apoderado" id="direccion_apoderado" class="form-control"
-                      placeholder="Dirección" required maxlength="100">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="edad_estudiante">Ingresar edad del estudiante</label>
-                    <input type="text" name="edad_estudiante" id="edad_estudiante" class="form-control" placeholder="Edad">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="telefono_apoderado">Ingresar celular del apoderado</label>
-                    <input type="text" name="telefono_apoderado" id="telefono_apoderado" class="form-control"
-                      placeholder="Número de celular" required maxlength="9" onkeypress="allowOnlyNumbers(event)"
-                      title="Debe contener 9 dígitos">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="nac_estudiante">Año de nacimiento del estudiante</label>
-                    <input type="date" name="nac_estudiante" id="nac_estudiante" class="form-control"
-                      placeholder="Año de nacimiento">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="correo_apoderado">Ingresar correo del apoderado</label>
-                    <input type="text" name="correo_apoderado" id="correo_apoderado" class="form-control" placeholder="Correo del apoderado">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                    <label for="grado_estudiante">Ingresar grado del estudiante</label>
-                    <select name="grado_estudiante" id="grado_estudiante" class="form-control" required>
-                      <option value="">Seleccione un grado</option>
-                      <option value="1ero de primaria">1ero de primaria</option>
-                      <option value="2do de primaria">2do de primaria</option>
-                      <option value="3ro de primaria">3ro de primaria</option>
-                      <option value="4to de primaria">4to de primaria</option>
-                      <option value="5to de primaria">5to de primaria</option>
-                      <option value="6to de primaria">6to de primaria</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
-                </div>
-              </div>
-            </form>
-            <!-- Bloque del Mensaje de Éxito -->
-            <div class="success-message" id="successMessage">Registro exitoso</div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-
+    </section>
 
   <br>
   <br>
-
   <br>
-
   <section id="hello" class="home bg-mega">
     <div class="container">
-      <div class="row">
-        <div class="main_home">
-          <div class="home_text text-center">
-            <!-- Agregar la imagen del logo -->
-            <a href="#brand">
-              <img src="assets/images/insignia.png" class="logo logo-display m-top-10" alt="" style="padding: 3.5em;">
-            </a>
-            <h2 class="text-white">Bienvenidos a Institución Educativa Virgen de Guadalupe, donde la excelencia
-              académica y el desarrollo integral de nuestros estudiantes son nuestra prioridad</h2>
-          </div>
-          <div class="home_btns m-top-40 text-center">
-            <a href="index.php" class="btn btn-primary m-top-20">Acceder a pagina principal</a>
-          </div>
+        <div class="row">
+            <div class="main_home">
+                <div class="home_text text-center">
+                    <!-- Agregar la imagen del logo -->
+                    <a href="#brand">
+                        <img src="assets/images/insignia.png" class="logo logo-display m-top-10" alt="" style="padding: 3.5em;">
+                    </a>
+                    <h2 class="text-white" style="font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);">Bienvenidos a Institución Educativa Virgen de Guadalupe, donde la excelencia académica y el desarrollo integral de nuestros estudiantes son nuestra prioridad</h2>
+                </div>
+                <div class="home_btns m-top-40 text-center">
+                    <a href="index.php" class="btn btn-primary btn-lg m-top-20">Acceder a página principal</a>
+                    <br>
+                    <a href="indexestudianteapoderado.php" class="btn btn-primary btn-lg m-top-20">Acceso Estudiantes</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
   </section>
-
-
-
 
   <!-- Sobre Nosotros -->
   <section id="about" class="about roomy-100">
@@ -327,8 +329,6 @@ if (!isValid) {
       </div>
     </div>
   </section>
-
-
 
   <!-- Servicios -->
   <section id="service" class="service roomy-100">
@@ -380,7 +380,6 @@ if (!isValid) {
   </section>
 
 
-
   <!-- Footer -->
   <footer id="footer" class="footer bg-black">
     <div class="container">
@@ -403,56 +402,6 @@ if (!isValid) {
   <script src="assets/js/main.js"></script>
 
   <!-- Validaciones -->
-  <script>
-  // Mostrar el mensaje de éxito si existe el parámetro en la URL 
-  window.onload = function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('registro') === 'exitoso') {
-      document.getElementById('successMessage').classList.add('show'); // Eliminar el parámetro 'registro' de la URL 
-      const url = new URL(window.location);
-      url.searchParams.delete('registro');
-      window.history.replaceState({}, document.title, url);
-    }
-  };
-  </script>
-
-  <script>
-  document.getElementById('matricula-form').addEventListener('submit', function(event) {
-    var isValid = true;
-
-    // Validar que solo se ingresen letras en campos de texto
-    var textoInputs = document.querySelectorAll(
-      'input[type="text"]:not(#telefono_apoderado):not(#dni_apoderado):not(#direccion_apoderado)not(#correo_apoderado)');
-    textoInputs.forEach(function(input) {
-      var regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
-      if (!regex.test(input.value)) {
-        isValid = false;
-        alert(input.getAttribute('placeholder') + " debe contener solo letras y espacios");
-      }
-    });
-
-    // Validar DNI
-    var dniInput = document.getElementById('dni_apoderado');
-    if (!/^\d{8}$/.test(dniInput.value)) {
-      isValid = false;
-      alert("DNI debe contener 8 dígitos");
-    }
-
-    // Validar Teléfono
-    var telefonoInput = document.getElementById('telefono_apoderado');
-    if (!/^\d{9}$/.test(telefonoInput.value)) {
-      isValid = false;
-      alert("Teléfono debe contener 9 dígitos");
-    }
-   // Validar Correo Electrónico 
-
-
-    
-  });
-  </script>
-
-
-
 
 </body>
 
