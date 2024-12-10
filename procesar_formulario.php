@@ -13,6 +13,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$conn->set_charset("utf8mb4"
 // Obtener los datos del formulario
 $nombreapellido_apoderado = $_POST['nombreapellido_apoderado'];
 $direccion_apoderado = $_POST['direccion_apoderado'];
